@@ -5,6 +5,14 @@ Este repositorio se creó para guardar las tareas y proyectos del tercer semestr
 ## Grupo
 La Cachoneta
 
+## Organización de Equipos
+
+| Equipo | Tecnología | Integrantes |
+| :--- | :--- | :--- |
+| **Equipo 1** | Java | <ul><li>Cristhian Barrientos</li><li>Germán Fratucello</li><li>Nicolás Cohen</li></ul> |
+| **Equipo 2** | Python | <ul><li>Agustín Gonzalez</li><li>Esteban Montenegro</li></ul> |
+| **Equipo 3** | Javascript | <ul><li>Enzo Ulloa</li><li>Ramiro Soria</li><li>Emmanuel Yapura</li></ul> |
+
 ## Integrantes
 - Nicolás Cohen
 - Samuel Rodríguez
