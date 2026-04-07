@@ -7,7 +7,6 @@ La Cachoneta
 
 ## Integrantes
 - Nicolás Cohen
-- Samuel Rodríguez
 - Cristhian Barrientos
 - Ramiro Soria
 - Enzo Ulloa
