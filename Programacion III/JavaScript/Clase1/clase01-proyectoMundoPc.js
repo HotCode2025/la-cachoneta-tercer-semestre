@@ -1,3 +1,4 @@
+// Clase Orden (AGREGACIÓN)
 class Orden {
   static contadorOrdenes = 0;
 
@@ -11,10 +12,11 @@ class Orden {
   }
 
   mostrarOrden() {
-    return `Orden: ${this._idOrden} \n-- Computadoras -- \n${this._computadoras.map(computadora => computadora.toString()).join('\n')}`;
+    return `Orden: ${this._idOrden} \n\n-- Computadoras -- \n${this._computadoras.map(computadora => computadora.toString()).join('\n\n')}`;
   }
 }
 
+// Clase Computadora
 class Computadora {
   static contadorComputadora = 0;
 
@@ -31,6 +33,7 @@ class Computadora {
   }
 }
 
+// Clase Monitor
 class Monitor {
   static contadorMonitor = 0;
 
@@ -50,6 +53,7 @@ class Monitor {
   }
 }
 
+// Clase DispositivoEntrada (PADRE)
 class DispositivoEntrada {
   constructor(tipoEntrada, marca) {
     this._tipoEntrada = tipoEntrada;
@@ -75,6 +79,7 @@ class DispositivoEntrada {
   }
 }
 
+// Clase Teclado (HIJO de DispositivoEntrada)
 class Teclado extends DispositivoEntrada {
   static contadorTeclado = 0;
 
@@ -88,6 +93,7 @@ class Teclado extends DispositivoEntrada {
   }
 }
 
+// Clase Raton (HIJO de DispositivoEntrada)
 class Raton extends DispositivoEntrada {
   static contadorRaton = 0;
 
@@ -101,18 +107,30 @@ class Raton extends DispositivoEntrada {
   }
 }
 
+// PRUEBA
+
+// Dispostivos de Entrada
 let raton = new Raton('USB', 'Logitech');
 console.log(raton.toString());
+let raton2 = new Raton('Bluetooth', 'HP');
 
 let teclado = new Teclado('USB', 'Microsoft');
 console.log(teclado.toString());
+let teclado2 = new Teclado('Bluetooth', 'Dell');
 
+
+// Monitores
 let monitor = new Monitor('Dell', '24 pulgadas');
 console.log(monitor.toString());
+let monitor2 = new Monitor('HP', '27 pulgadas');
 
+// Computadoras
 let computadora = new Computadora('HP', monitor, teclado, raton);
 console.log(computadora.toString());
+let computadora2 = new Computadora('Dell', monitor2, teclado2, raton2);
 
+// Orden
 let orden = new Orden();
 orden.agregarComputadora(computadora);
+orden.agregarComputadora(computadora2);
 console.log(orden.mostrarOrden());
