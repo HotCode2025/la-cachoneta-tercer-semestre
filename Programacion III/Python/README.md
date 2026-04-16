@@ -1,14 +1,3 @@
-## Grupo
-La Cachoneta
+| **Equipo 2** | Python | <ul><li>Agustín Gonzalez</li><li>Esteban Montenegro</li></ul> |
 
-## Integrantes
-- Nicolás Cohen
-- Samuel Rodríguez
-- Mauricio Esparza
-- Cristhian Barrientos
-- Ramiro Soria
-- Enzo Ulloa
-- Emmanuel Yapura
-- Germán Fratucello
-- Agustín Gonzalez
-- Esteban Montenegro
+Dia 16/04/2026 - Subimos clase 1 de Python al repositorio

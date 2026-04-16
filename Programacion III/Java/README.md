@@ -1,14 +1,1 @@
-## Grupo
-La Cachoneta
-
-## Integrantes
-- Nicolás Cohen
-- Samuel Rodríguez
-- Mauricio Esparza
-- Cristhian Barrientos
-- Ramiro Soria
-- Enzo Ulloa
-- Emmanuel Yapura
-- Germán Fratucello
-- Agustín Gonzalez
-- Esteban Montenegro
+| **Equipo 1** | Java | <ul><li>Cristhian Barrientos</li><li>Germán Fratucello</li><li>Nicolás Cohen</li></ul> |
