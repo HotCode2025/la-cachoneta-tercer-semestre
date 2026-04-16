@@ -6,7 +6,7 @@ public class PersonaSinBloques {
     private static int contadorPersonas = 0; 
 
     public PersonaSinBloques() {
-        // Este es el reemplazo del bloque NO estatico, ahora lo lógica se pone aca
+        // Este es el reemplazo del bloque NO estatico, ahora lo lógica se pone aca (dentro del constructor)
         this.idPersona = ++PersonaSinBloques.contadorPersonas;
         
         System.out.println("Ejecución del constructor (Sin bloques)");
