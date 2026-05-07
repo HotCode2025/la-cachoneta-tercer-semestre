@@ -10,6 +10,11 @@
 
         // 1 será piedra, 2 será papel y 3 será tijera
 
+        
+        function azar(min,max){
+            return Math.floor(Math.random()*(max-min + 1)+min);
+        }
+        
         function eleccion(jugador){
          if(jugador ==1)  return "Piedra 🪨";
          if (jugador ==2) return "Papel 📃";
@@ -33,9 +38,12 @@
         return("HAS PERDIDO❌")
         }    
     }
-   let max = 3
-    let min = 1
-    let pc = Math.floor(Math.random()*(max-min+1)+min)
+   
+    //let max = 3
+    //let min = 1
+    //let pc = Math.floor(Math.random()*(max-min+1)+min)
+
+    let pc = azar(1,3);
     let jugador = prompt("Elige : 1 piedra, 2 papel, 3 tijera")
 
     //Se van a mostrar los nombres de los jugadores
