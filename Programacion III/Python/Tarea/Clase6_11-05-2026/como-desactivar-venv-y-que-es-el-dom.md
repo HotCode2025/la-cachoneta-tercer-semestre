@@ -20,7 +20,7 @@ El DOM genera un Árbol de Nodos que representa la jerarquia de un documento HTM
 * Attributes: Este nodo representa los atributos de las etiquetas como `class, id o src`.
 
 ### Imagen de ejemplo del Arbol de Nodos
-![image_alt]()
+![image_alt](https://github.com/HotCode2025/la-cachoneta-tercer-semestre/blob/93ad9bdbb199c6b74b0f76be6e1b9a1ccb2b1ce5/Programacion%20III/Python/Tarea/Clase6_11-05-2026/node_tree_dom.jpg)
 
 ### Ejemplo de uso del DOM:
 Si tenemos este HTML:
