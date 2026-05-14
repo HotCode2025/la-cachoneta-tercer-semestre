@@ -1,0 +1,59 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+h1 {
+  font-size: 35px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(226, 225, 175);
+  width: 50%;
+  height: 50%;
+  font-family: Arial, sans-serif;
+  border-radius: 30px;
+  border: 2px solid rgb(82, 76, 53);
+  box-shadow: 0 16px 24px rgba(0, 0, 0, 0.5);
+}
+
+#jugador-contra-computadora {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 20px;
+  font-size: 30px;
+}
+
+#jugador, #computadora {
+  font-size: 60px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 2px solid rgb(82, 76, 53);
+  background-color: rgb(152, 224, 162);
+}
