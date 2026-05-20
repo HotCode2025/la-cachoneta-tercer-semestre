@@ -1,0 +1,73 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 2rem auto;
+}
+
+h1{
+    padding: 0.2rem;
+}
+
+input, button{
+    width: 100%;
+    margin: 0.1rem;
+}
+
+button{
+    padding: 0.2rem;
+    color: wheat;
+    background-color: gray;
+    border: transparent;
+    border-radius: 0.1rem;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: white;
+    border: 1px solid black;
+    color: gray;
+}
+
+.controles{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    label{
+        font-size: 1.1rem;
+    }
+}
+
+.tablero{
+    margin-top: 0.5rem;
+    display: grid;
+}
+
+.cuadro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid black;
+    font-weight: bold;
+}
+
+.hidden{
+    display: none;
+}
+
+.texto-error{
+    font-size: 1.2rem;
+    color: red;
+    border: 2px solid red;
+    padding: 0 0.5rem
+}
