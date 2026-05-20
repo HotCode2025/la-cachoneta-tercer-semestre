@@ -1,0 +1,52 @@
+04:35:27 PM:DEBUG [logger_base.py:15] Mensaje a nivel debug
+04:35:27 PM:INFO [logger_base.py:16] Mensaje a nivel info
+04:35:27 PM:WARNING [logger_base.py:17] Mensaje a nivel warning
+04:35:27 PM:ERROR [logger_base.py:18] Mensaje a nivel error
+04:35:27 PM:CRITICAL [logger_base.py:19] Mensaje a nivel critical
+05:01:33 PM:DEBUG [Persona.py:54] 
+      ID Persona: jperez@mail.com
+      Nombre: 1
+      Apellido: Juan
+      Email: Perez
+    
+05:03:00 PM:DEBUG [Persona.py:54] 
+      ID Persona: jperez@mail.com
+      Nombre: 1
+      Apellido: Juan
+      Email: Perez
+    
+05:10:53 PM:DEBUG [Persona.py:54] 
+      ID Persona: 1
+      Nombre: Juan
+      Apellido: Perez
+      Email: jperez@mail.com
+    
+05:10:53 PM:DEBUG [Persona.py:56] 
+      ID Persona: None
+      Nombre: Jose
+      Apellido: Lepez
+      Email: ljose@mail.com
+    
+05:11:58 PM:DEBUG [Persona.py:54] 
+      ID Persona: 1
+      Nombre: Juan
+      Apellido: Perez
+      Email: jperez@mail.com
+    
+05:11:58 PM:DEBUG [Persona.py:56] 
+      ID Persona: None
+      Nombre: Jose
+      Apellido: Lepez
+      Email: ljose@mail.com
+    
+05:11:58 PM:DEBUG [Persona.py:58] 
+      ID Persona: 1
+      Nombre: None
+      Apellido: None
+      Email: None
+    
+05:25:13 PM:DEBUG [conexion.py:25] Conexión Exitosa: <connection object at 0x0000018B282528A0; dsn: 'user=agus_postgre password=xxx dbname=test_bd host=127.0.0.1 port=5432', closed: 0>
+05:27:02 PM:ERROR [conexion.py:28] Ocurrio un error: connection to server at "127.0.0.1", port 5432 failed: FATAL:  password authentication failed for user "agus_postgres"
+
+05:28:13 PM:DEBUG [conexion.py:25] Conexión Exitosa: <connection object at 0x0000021AA5C628A0; dsn: 'user=agus_postgre password=xxx dbname=test_bd host=127.0.0.1 port=5432', closed: 0>
+05:28:13 PM:DEBUG [conexion.py:38] Se abrió correctamente el cursor: <cursor object at 0x0000021AA7AC3E60; closed: 0>
