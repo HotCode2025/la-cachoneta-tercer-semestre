@@ -14,14 +14,6 @@ function eleccion(jugador) {
   return 'Elige una opcion valida 🚩'
 }
 
-//Variables de estado
-
-//let max = 3
-//let min = 1
-//let pc = Math.floor(Math.random()*(max-min+1)+min)
-//let pc = azar(1,3);
-//let jugador = prompt("Elige : 1 piedra, 2 papel, 3 tijera")
-
 //Sistema de inicio al mejor de 5
 let triunfos = 0
 let perdidas = 0
