@@ -7,7 +7,7 @@ const $textError = document.querySelector(".texto-error");
 
 // Variables globales
 let tablero = [];
-const posiciones = [];
+let posiciones = [];
 let N = 0;
 
 // Creamos el tablero vacío
@@ -132,6 +132,7 @@ function renderizarTablero() {
 
 $btnCant.addEventListener("click", () => {
   N = parseInt($input.value);
+  posiciones = [];
 
   if (N >= 8) {
     crearTablero(N);
