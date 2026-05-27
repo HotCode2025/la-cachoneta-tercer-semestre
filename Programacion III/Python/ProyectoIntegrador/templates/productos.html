@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Productos</title>
+</head>
+
+<body>
+
+    <h1>Productos</h1>
+
+    <table border="1">
+
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+        </tr>
+
+        {% for p in productos %}
+
+        <tr>
+            <td>{{ p.nombre }}</td>
+            <td>${{ p.precio }}</td>
+            <td>{{ p.stock }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        
+        <a href="/" class="nav-link">&larr; Volver al Inicio</a>
+
+        <div class="card">
+            <h1>Editar Producto</h1>
+            
+            <form method="POST">
+                <label>Nombre</label>
+                <input type="text" value="{{ producto.nombre }}" disabled>
+
+                <label>Precio</label>
+                <input type="number" step="0.01" name="precio" value="{{ producto.precio }}" required>
+
+                <label>Stock</label>
+                <input type="number" name="stock" value="{{ producto.stock }}" required>
+
+                <button type="submit">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
