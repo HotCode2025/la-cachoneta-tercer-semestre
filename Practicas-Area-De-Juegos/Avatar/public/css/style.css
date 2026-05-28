@@ -16,9 +16,58 @@ body{
   justify-content: center;
   align-items: center;
   max-width: 900px;
-  background-color: rgb(110, 158, 142);
+  background-color: rgba(22, 22, 22, 0.9);
+  backdrop-filter: blur(20px);
   border-radius: 15px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
   padding: 1rem;
   text-align: center;
+  color: white;
+  font-weight: 300;
+}
+
+button {
+  background-color: rgba(180, 7, 7, 0.2);
+  border: 1px solid rgb(160, 3, 3);
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  padding: 0.25rem 0.5rem;
+}
+
+#personaje-seleccionado {
+  background-color: rgba(180, 7, 7, 0.2);
+  border: 1px solid rgb(160, 3, 3);
+  justify-self: center;
+  padding: 0.2rem 1rem;
+  border-radius: 10px;
+  margin: 0;
+  margin-top: 0.5rem;
+}
+
+#personaje-computadora {
+  background-color: rgba(70, 73, 119, 0.2);
+  border: 1px solid rgb(139, 141, 248);
+  justify-self: center;
+  padding: 0.2rem 1rem;
+  border-radius: 10px;
+  margin: 0;
+  margin-top: 0.5rem;
+}
+
+#boton-fuego {
+  background-color: rgba(48, 17, 5, 0.5);
+  border: 1px solid rgb(119, 35, 2);
+}
+#boton-agua {
+  background-color: rgba(16, 71, 107, 0.5);
+  border: 1px solid rgb(79, 121, 238);
+}
+#boton-aire {
+  background-color: rgba(158, 158, 158, 0.5);
+  border: 1px solid rgb(255, 255, 255);
+}
+#boton-tierra {
+  background-color: rgba(46, 35, 25, 0.5);
+  border: 1px solid rgb(224, 149, 100);
 }
