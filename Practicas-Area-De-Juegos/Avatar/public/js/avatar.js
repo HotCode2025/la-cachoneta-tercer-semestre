@@ -1,10 +1,20 @@
 function seleccionarPersonajeJugador(personaje) {
+  let spanPersonajeSeleccionado = document.getElementById('personaje-seleccionado')
   console.log(personaje)
   if (personaje) {
-    alert(`SELECCIONASTE EL PERSONAJE ${personaje}`)
+    spanPersonajeSeleccionado.innerText = `Has seleccionado a ${personaje}`
+    aleatoria()
   } else {
-    alert(`NO HAS SELECCIONADO NINGUN PERSONAJE`)
+    spanPersonajeSeleccionado.innerText = `Debes seleccionar a un personaje`
   }
+}
+
+function aleatoria() {
+  const personajes = ["Zuko 🔥", "Katara 💧", "Aang 🌪️", "Toph 🌱"]
+  const personajeAleatorio = Math.floor(Math.random() * personajes.length)
+
+  let spanPersonajeComputadora = document.getElementById('personaje-computadora')
+  spanPersonajeComputadora.innerText = `La computadora ha seleccionado a ${personajes[personajeAleatorio]}`
 }
 
 let botonPersonajeJugador = document.getElementById('boton-personaje')
