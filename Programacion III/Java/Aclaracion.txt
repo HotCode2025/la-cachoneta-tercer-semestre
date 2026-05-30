@@ -1,0 +1,3 @@
+-La clase numero 7 tomaría el rol de la clase 6 ya que en los videos la clase 6 hace referencia totalmente a la instalación y configuración de Docker. 
+
+-Es por esto que la clase numero 7 del campus en el repositorio se llama clase 6.
