@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+{% block title %}Comprar un producto{% endblock %} 
+{%block content %}
+<a href="/" class="nav-link">&larr; Volver al Inicio</a>
+<div class="card">
+  <h2>Inventario de Productos</h2>
+  <table>
+    <tr>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th>Stock</th>
+      <th>Acciones</th>
+    </tr>
+
+    {% for p in productos %}
+    <tr>
+      <td>{{ p.nombre }}</td>
+      <td>${{ p.precio }}</td>
+      <td>
+        {% if p.stock <= 10 %}
+        <span class="critico">{{ p.stock }}</span>
+        {% else %} {{ p.stock }} {% endif %}
+      </td>
+      <td style="display: flex; align-items: center">
+        <form action="/vender" method="POST" class="inline-form">
+          <input type="hidden" name="nombre" value="{{ p.nombre }}" />
+          <input
+            type="number"
+            name="cantidad"
+            min="1"
+            placeholder="Cant"
+            required
+          />
+          <button type="submit"><img width="20" height="20" src="/static/icons/buy-icon.png" alt="buy"></button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

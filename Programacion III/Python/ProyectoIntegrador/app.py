@@ -26,20 +26,52 @@ def index():
     )
 
 
-@app.route("/agregar", methods=["POST"])
+@app.route("/agregar", methods=["GET","POST"])
 def agregar_producto():
+    if request.method == "POST":
+        nombre = request.form["nombre"]
+        precio = float(request.form["precio"])
+        stock = int(request.form["stock"])
 
-    nombre = request.form["nombre"]
-    precio = float(request.form["precio"])
-    stock = int(request.form["stock"])
+        service.agregar_producto(
+            nombre,
+            precio,
+            stock
+        )
 
-    service.agregar_producto(
-        nombre,
-        precio,
-        stock
+        return redirect(url_for("index"))
+    return render_template(
+        "agregar.html"
     )
 
-    return redirect(url_for("index"))
+@app.route("/comprar")
+def comprar_productos():
+    productos = service.obtener_productos()
+    
+    return render_template(
+        "comprar.html",
+        productos=productos
+    )
+
+@app.route("/inventario/editar")
+def vista_editar_inventario():
+    lista_productos = service.obtener_productos() 
+    
+    return render_template(
+        "inventario.html", 
+        productos=lista_productos, 
+        accion="editar"
+    )
+
+@app.route("/inventario/eliminar")
+def vista_eliminar_inventario():
+    lista_productos = service.obtener_productos()
+    
+    return render_template(
+        "inventario.html", 
+        productos=lista_productos, 
+        accion="eliminar"
+    )
 
 @app.route("/editar/<nombre>", methods=["GET", "POST"])
 def editar_producto(nombre):
@@ -86,6 +118,14 @@ def vender_producto():
 
     return redirect(url_for("index"))
 
+@app.route("/productos")
+def mostrar_productos():
+    productos = service.obtener_productos()
+
+    return render_template(
+        "productos.html",
+        productos=productos
+    )
 
 @app.route("/ventas")
 def ventas():

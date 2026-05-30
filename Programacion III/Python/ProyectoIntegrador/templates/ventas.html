@@ -1,37 +1,25 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historial de Ventas</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
+{% extends 'base.html' %} 
+{% block title %}Historial de ventas{% endblock %} 
+{%block content %} 
+<a href="/" class="nav-link">&larr; Volver al Inicio</a>
 
-    <div class="container">
-        
-        <a href="/" class="nav-link">&larr; Volver al Inicio</a>
+<div class="card">
+    <h1>Historial de Ventas</h1>
 
-        <div class="card">
-            <h1>Historial de Ventas</h1>
+    <table>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+        </tr>
 
-            <table>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Total</th>
-                </tr>
-
-                {% for venta in ventas %}
-                <tr>
-                    <td>{{ venta.producto }}</td>
-                    <td>{{ venta.cantidad }}</td>
-                    <td style="font-weight: bold; color: var(--primary-color);">${{ venta.total }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </div>
-
-</body>
-</html>
+        {% for venta in ventas %}
+        <tr>
+            <td>{{ venta.producto }}</td>
+            <td>{{ venta.cantidad }}</td>
+            <td style="font-weight: bold; color: var(--primary-color);">${{ venta.total }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

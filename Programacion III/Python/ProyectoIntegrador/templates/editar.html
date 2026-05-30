@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Producto</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-
-    <div class="container">
-        
+{% extends 'base.html' %} 
+{% block title %}Editar producto{% endblock %} 
+{%block content %}
         <a href="/" class="nav-link">&larr; Volver al Inicio</a>
 
         <div class="card">
@@ -25,10 +16,7 @@
                 <label>Stock</label>
                 <input type="number" name="stock" value="{{ producto.stock }}" required>
 
-                <button type="submit">Guardar Cambios</button>
+                <button class="confirm-button" type="submit">Guardar Cambios</button>
             </form>
         </div>
-    </div>
-
-</body>
-</html>
+{% endblock %}

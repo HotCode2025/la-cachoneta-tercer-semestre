@@ -1,35 +1,26 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends 'base.html' %} 
+{% block title %}Lista de productos{% endblock %} 
+{%block content %}
+<a href="/" class="nav-link">&larr; Volver al Inicio</a>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Productos</title>
-</head>
+<h1>Productos</h1>
+<div class="card">
+  <table>
+    <tr>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th>Stock</th>
+    </tr>
 
-<body>
+    {% for p in productos %}
 
-    <h1>Productos</h1>
+    <tr>
+      <td>{{ p.nombre }}</td>
+      <td>${{ p.precio }}</td>
+      <td>{{ p.stock }}</td>
+    </tr>
 
-    <table border="1">
-
-        <tr>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Stock</th>
-        </tr>
-
-        {% for p in productos %}
-
-        <tr>
-            <td>{{ p.nombre }}</td>
-            <td>${{ p.precio }}</td>
-            <td>{{ p.stock }}</td>
-        </tr>
-
-        {% endfor %}
-
-    </table>
-
-</body>
-
-</html>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
