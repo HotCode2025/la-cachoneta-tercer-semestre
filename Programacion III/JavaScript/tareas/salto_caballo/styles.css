@@ -1,0 +1,40 @@
+body{
+    text-align:center;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.controles{
+    margin-bottom:20px;
+}
+
+#tablero{
+    display:grid;
+    justify-content:center;
+    margin-top:20px;
+}
+
+.casilla{
+
+    width:60px;
+    height:60px;
+
+    border:1px solid black;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-weight:bold;
+}
+
+.blanca{
+    background-color:#f0d9b5;
+}
+
+.negra{
+    background-color:#b58863;
+}
+
+.caballo{
+    background-color:gold !important;
+}
