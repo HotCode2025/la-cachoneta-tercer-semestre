@@ -1,0 +1,51 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  text-align: center;
+  padding-top: 50px;
+}
+.contenedor {
+  display: flex;
+  justify-content: space-around;
+  width: 500px;
+  height: 200px;
+  background: white;
+  border-bottom: 8px solid #8b4513;
+  margin: 0 auto 30px auto;
+  padding-top: 20px;
+}
+.torre {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  width: 120px;
+  height: 100%;
+  border-left: 8px solid #cd853f;
+}
+.disco {
+  height: 25px;
+  border-radius: 4px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+/* Tamaños y colores dinámicos para los discos variables */
+.d1 { width: 40px; background-color: #ff4757; }
+.d2 { width: 60px; background-color: #ffa502; }
+.d3 { width: 80px; background-color: #2ed573; }
+.d4 { width: 100px; background-color: #1e90ff; }
+.d5 { width: 120px; background-color: #9b59b6; }
+.d6 { width: 140px; background-color: #34495e; }
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #2ed573;
+  color: white;
+  border: none;
+  cursor: pointer;
+}

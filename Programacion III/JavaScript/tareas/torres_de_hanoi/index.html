@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Torres de Hanoi Paso a Paso</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Torres de Hanói Paso a Paso</h1>
+
+    <div style="margin-bottom: 20px;">
+        <label>Cantidad de discos: </label>
+        <input type="number" id="cantidadDiscos" value="3" min="1" max="6" style="width: 50px; text-align: center;">
+        <button onclick="iniciarJuego()" style="padding: 5px 10px; font-size: 14px; background-color: #1e90ff;">Reiniciar</button>
+    </div>
+
+    <div class="contenedor">
+        <div id="A" class="torre"></div>
+        <div id="B" class="torre"></div>
+        <div id="C" class="torre"></div>
+    </div>
+
+    <button onclick="siguienteMovimiento()">Siguiente movimiento</button>
+
+   
+</body>
+</html>
