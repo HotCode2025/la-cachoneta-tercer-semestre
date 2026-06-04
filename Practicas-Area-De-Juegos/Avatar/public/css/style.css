@@ -55,7 +55,28 @@ button {
   margin-top: 0.5rem;
 }
 
-#boton-fuego {
+#botones-ataques {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 40px;
+}
+
+#seleccionar-ataque button {
+  background-color: rgba(40, 78, 104, 0.5);
+  border: 1px solid rgb(135, 161, 233);
+  font-size: 20px;
+}
+
+.log-ataque {
+  background-color: rgba(32, 82, 53, 0.5);
+  border: 1px solid rgb(97, 197, 127);
+  border-radius: 10px;
+}
+
+/* Dejo esto aca por si despues quiero decorar lo de elegir personaje */
+/* #boton-fuego {
   background-color: rgba(48, 17, 5, 0.5);
   border: 1px solid rgb(119, 35, 2);
 }
@@ -70,4 +91,4 @@ button {
 #boton-tierra {
   background-color: rgba(46, 35, 25, 0.5);
   border: 1px solid rgb(224, 149, 100);
-}
+} */
