@@ -4,3 +4,7 @@ __pycache__/
 node_modules/
 env/
 firebase-key.json
+.idea/
+*.iml
+out/
+gen/
