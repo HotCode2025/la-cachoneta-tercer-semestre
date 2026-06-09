@@ -139,3 +139,77 @@
       Email: jjpena@email.com
     
 09:10:48 PM:DEBUG [persona_dao.py:54] Personas actualizadas: 1
+09:19:48 PM:DEBUG [conexion.py:25] Conexión Exitosa: <connection object at 0x0000022095532DF0; dsn: 'user=agus_postgre password=xxx dbname=test_bd host=127.0.0.1 port=5432', closed: 0>
+09:19:48 PM:DEBUG [conexion.py:38] Se abrió correctamente el cursor: <cursor object at 0x0000022097411B60; closed: 0>
+09:19:48 PM:DEBUG [persona_dao.py:56] Los objetos eliminados son: 
+      ID Persona: 13
+      Nombre: None
+      Apellido: None
+      Email: None
+    
+09:19:48 PM:DEBUG [persona_dao.py:63] Personas eliminadas: 1
+09:20:12 PM:DEBUG [conexion.py:25] Conexión Exitosa: <connection object at 0x0000028B00362DF0; dsn: 'user=agus_postgre password=xxx dbname=test_bd host=127.0.0.1 port=5432', closed: 0>
+09:20:12 PM:DEBUG [conexion.py:38] Se abrió correctamente el cursor: <cursor object at 0x0000028B02251B60; closed: 0>
+09:20:12 PM:DEBUG [persona_dao.py:56] Los objetos eliminados son: 
+      ID Persona: 8
+      Nombre: None
+      Apellido: None
+      Email: None
+    
+09:20:12 PM:DEBUG [persona_dao.py:63] Personas eliminadas: 1
+09:21:17 PM:DEBUG [conexion.py:25] Conexión Exitosa: <connection object at 0x0000022679E52DF0; dsn: 'user=agus_postgre password=xxx dbname=test_bd host=127.0.0.1 port=5432', closed: 0>
+09:21:17 PM:DEBUG [conexion.py:38] Se abrió correctamente el cursor: <cursor object at 0x000002267BCD1B60; closed: 0>
+09:21:17 PM:DEBUG [persona_dao.py:78] 
+      ID Persona: 2
+      Nombre: Carla
+      Apellido: Gomez
+      Email: kgomez@mail.com
+    
+09:21:17 PM:DEBUG [persona_dao.py:78] 
+      ID Persona: 10
+      Nombre: Marcelo
+      Apellido: Cuenca
+      Email: cuencam@mail.com
+    
+09:21:17 PM:DEBUG [persona_dao.py:78] 
+      ID Persona: 9
+      Nombre: Marcos
+      Apellido: Canto
+      Email: mcanto@mail.com
+    
+09:21:17 PM:DEBUG [persona_dao.py:78] 
+      ID Persona: 12
+      Nombre: María
+      Apellido: Esparza
+      Email: mesparza@mail.com
+    
+09:21:17 PM:DEBUG [persona_dao.py:78] 
+      ID Persona: 16
+      Nombre: Alex
+      Apellido: Rojas
+      Email: arojas@mail.com
+    
+09:21:17 PM:DEBUG [persona_dao.py:78] 
+      ID Persona: 17
+      Nombre: Agustin
+      Apellido: Gonzalez
+      Email: agonzalez@email.com
+    
+09:21:17 PM:DEBUG [persona_dao.py:78] 
+      ID Persona: 18
+      Nombre: Pedro
+      Apellido: Romero
+      Email: promero@mail.com
+    
+09:21:17 PM:DEBUG [persona_dao.py:78] 
+      ID Persona: 19
+      Nombre: Homero
+      Apellido: Ramos
+      Email: omeror@mail.com
+    
+09:21:17 PM:DEBUG [persona_dao.py:78] 
+      ID Persona: 1
+      Nombre: Juan José
+      Apellido: Pena
+      Email: jjpena@email.com
+    
