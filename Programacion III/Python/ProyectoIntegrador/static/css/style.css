@@ -317,3 +317,21 @@ td a {
   display: inline-block;
   margin-bottom: 1.5rem;
 }
+
+/* Alerta errores */
+.alert{
+  border: 1px solid #6b7280;
+  border-radius: 10px;
+  padding: 0.7rem;
+  margin: 0.5rem 0;
+  color: white;
+  font-weight: bold;
+}
+
+.danger{
+  background-color: red;
+}
+
+.warning{
+  background-color: yellow;
+}
