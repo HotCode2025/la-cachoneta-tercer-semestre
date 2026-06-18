@@ -29,20 +29,31 @@ def index():
 @app.route("/agregar", methods=["GET","POST"])
 def agregar_producto():
     if request.method == "POST":
-        nombre = request.form["nombre"]
-        precio = float(request.form["precio"])
-        stock = int(request.form["stock"])
+        nombre = request.form.get("nombre", "").strip()
+        precio_raw = request.form.get("precio", "")
+        stock_raw = request.form.get("stock", "")
 
-        service.agregar_producto(
-            nombre,
-            precio,
-            stock
-        )
+        if not nombre or not precio_raw or not stock_raw:
+            return render_template("agregar.html", error="todos los campos son obligatorios", tipo="danger", nombre=nombre, precio=precio_raw, stock=stock_raw)
 
+        if nombre.isdigit() or len(nombre) < 3:
+            return render_template("agregar.html", error="El nombre del producto debe ser un texto válido (mínimo 3 caracteres y no pueden ser solo números).", tipo="danger", nombre=nombre, precio=precio_raw, stock=stock_raw)
+        
+        try:
+            precio = float(precio_raw)
+            stock = int(stock_raw)
+
+            if precio <= 0 or stock < 0:
+                return render_template("agregar.html", error="El precio y/o el stock deben ser mayores a 0.", tipo="warning",  nombre=nombre, precio=precio_raw, stock=stock_raw)
+                
+        except ValueError:
+            return render_template("agregar.html", error="El precio y/o el stock deben ser numeros validos.", tipo="danger",  nombre=nombre, precio=precio_raw, stock=stock_raw)
+
+        service.agregar_producto(nombre, precio, stock)
         return redirect(url_for("index"))
-    return render_template(
-        "agregar.html"
-    )
+
+    return render_template("agregar.html")
+    
 
 @app.route("/comprar")
 def comprar_productos():
