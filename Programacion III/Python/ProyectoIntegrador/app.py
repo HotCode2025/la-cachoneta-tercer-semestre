@@ -27,6 +27,7 @@ def index():
 
 
 @app.route("/agregar", methods=["GET","POST"])
+@app.route("/agregar", methods=["GET","POST"])
 def agregar_producto():
     if request.method == "POST":
         nombre = request.form.get("nombre", "").strip()
@@ -48,6 +49,11 @@ def agregar_producto():
                 
         except ValueError:
             return render_template("agregar.html", error="El precio y/o el stock deben ser numeros validos.", tipo="danger",  nombre=nombre, precio=precio_raw, stock=stock_raw)
+        
+        creado_con_exito = service.agregar_producto(nombre, precio, stock)
+
+        if not creado_con_exito:
+            return render_template("agregar.html", error=f"El producto '{nombre}' ya existe. Si querés cambiar su precio o stock, usá la opción de editar.", tipo="danger", nombre=nombre, precio=precio_raw, stock=stock_raw)
 
         service.agregar_producto(nombre, precio, stock)
         return redirect(url_for("index"))
