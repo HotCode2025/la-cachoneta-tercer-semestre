@@ -7,6 +7,8 @@ class VerduleriaService:
 
 
     def agregar_producto(self, nombre, precio, stock):
+        if self.buscar_producto(nombre) is not None:
+            return False  
 
         producto = Producto(
             nombre,
@@ -17,6 +19,8 @@ class VerduleriaService:
         db.collection("productos") \
           .document(nombre) \
           .set(producto.to_dict())
+        
+        return True 
 
 
     def obtener_productos(self):
