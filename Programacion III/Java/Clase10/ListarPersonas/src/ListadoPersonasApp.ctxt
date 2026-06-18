@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=ListadoPersonasApp
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=
+comment2.target=void\ mostrarMenu()
+comment3.params=entrada\ personas
+comment3.target=boolean\ ejecutarOperacion(java.util.Scanner,\ java.util.List)
+numComments=4
