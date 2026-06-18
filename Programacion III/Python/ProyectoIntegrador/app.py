@@ -87,25 +87,39 @@ def vista_eliminar_inventario():
 @app.route("/editar/<nombre>", methods=["GET", "POST"])
 def editar_producto(nombre):
     if request.method == "POST":
-        precio = float(request.form["precio"])
-        stock = int(request.form["stock"])
+        precio_raw = request.form.get("precio", "")
+        stock_raw = request.form.get("stock", "")
 
-        # Llama al método de tu servicio para actualizar en Firestore
+        if not precio_raw or not stock_raw:
+            # Producto temporal para no perder los datos ingresados
+            producto_temp = {"nombre": nombre, "precio": precio_raw, "stock": stock_raw}
+            return render_template("editar.html", producto=producto_temp, error="Todos los campos son obligatorios.", tipo="danger")
+
+        # Validación de tipos de datos y valores positivos
+        try:
+            precio = float(precio_raw)
+            stock = int(stock_raw)
+
+            if precio <= 0 or stock < 0:
+                producto_temp = {"nombre": nombre, "precio": precio_raw, "stock": stock_raw}
+                return render_template("editar.html", producto=producto_temp, error="El precio debe ser mayor a 0 y el stock no puede ser negativo.", tipo="warning")
+                
+        except ValueError:
+            producto_temp = {"nombre": nombre, "precio": precio_raw, "stock": stock_raw}
+            return render_template("editar.html", producto=producto_temp, error="El precio y el stock deben ser números válidos.", tipo="danger")
+
+        # Si paso las validaciones modifico el producto
         service.modificar_producto(nombre, precio, stock)
-
         return redirect(url_for("index"))
 
-    # Llama al método de tu servicio para recuperar el producto actual
     producto = service.buscar_producto(nombre)
-    
-    # Control opcional por si intentan ingresar una URL de un producto que no existe
+
     if producto is None:
         return redirect(url_for("index"))
 
-    return render_template(
-        "editar.html",
-        producto=producto
+    return render_template("editar.html", producto=producto
     )
+
 
 
 @app.route("/eliminar/<nombre>")
