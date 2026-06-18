@@ -4,19 +4,24 @@
         <a href="/" class="nav-link">&larr; Volver al Inicio</a>
 
         <div class="card">
-            <h1>Editar Producto</h1>
-            
-            <form method="POST">
-                <label>Nombre</label>
-                <input type="text" value="{{ producto.nombre }}" disabled>
+    <h1>Editar Producto</h1>
 
-                <label>Precio</label>
-                <input type="number" step="0.01" name="precio" value="{{ producto.precio }}" required>
+    {% if error %}
+    <div class="alert {{ tipo }}">
+        {{ error }}
+    </div>
+    {% endif %}
+    <form method="POST">
+        <label>Nombre</label>
+        <input type="text" value="{{ producto.nombre }}" disabled>
 
-                <label>Stock</label>
-                <input type="number" name="stock" value="{{ producto.stock }}" required>
+        <label>Precio</label>
+        <input type="number" step="0.01" name="precio" value="{{ producto.precio }}" required>
 
-                <button class="confirm-button" type="submit">Guardar Cambios</button>
-            </form>
-        </div>
+        <label>Stock</label>
+        <input type="number" name="stock" value="{{ producto.stock }}" required>
+
+        <button class="confirm-button" type="submit">Guardar Cambios</button>
+    </form>
+</div>
 {% endblock %}
