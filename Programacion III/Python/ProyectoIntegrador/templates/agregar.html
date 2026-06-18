@@ -5,11 +5,17 @@
 
 <div class="card">
   <h2>Agregar Producto</h2>
+  {% if error %}
+    <div class="alert {{tipo}}">
+      {{ error }}
+    </div>
+  {% endif %}
   <form action="/agregar" method="POST">
     <input
       type="text"
       name="nombre"
       placeholder="Nombre del producto"
+      value="{{ nombre if nombre else '' }}"
       required
     />
     <input
@@ -17,12 +23,14 @@
       step="0.01"
       name="precio"
       placeholder="Precio ($)"
+      value="{{ precio if precio else '' }}"
       required
     />
     <input
       type="number"
       name="stock"
       placeholder="Cantidad en Stock"
+      value="{{ stock if stock else '' }}"
       required
     />
     <button class="add-btn" type="submit">Agregar Producto</button>
