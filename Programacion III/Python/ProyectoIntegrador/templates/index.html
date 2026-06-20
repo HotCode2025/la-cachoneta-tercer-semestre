@@ -3,65 +3,57 @@
 {% block title %}Panel de Administración{% endblock %}
 
 {% block content %}
-<section>
-  <div class="info-section">
-    <h3>Bienvenidos a la verduleria Don Cacho</h3>
+<section class="hero-card">
+  <div class="hero-info">
+    <span class="badge"> &star; Proyecto Integrador Python</span>
+    <h1>Bienvenidos a la verduleria Don Cacho</h1>
     <p>
-      Este es un proyecto academico diseniado para optimizar la gestion de
-      ventas y stock de una verduleria local, facilitando el control diario de
-      productos con una interfaz intuitiva.
+      Este es un proyecto académico diseñado para optimizar la gestión de
+      ventas y stock de una verdulería local, facilitando el control diario de
+      productos con una interfaz intuitiva y moderna pensada para el mercado actual.
     </p>
+    <div class="hero-actions">
+      <a href="{{url_for('mostrar_productos')}}" class="btn btn-primary">Ver catálogo</a>
+    </div>
   </div>
-  <img class="logo-cachoneta" src="/static/img/cachoneta.png" alt="logo" />
+  <div class="hero-image-wrapper">
+    <img class="logo-cachoneta" src="/static/img/cachoneta.png" alt="La Cachoneta Bus" />
+  </div>
 </section>
 
-<main>
-  <div class="panel-container">
+<main class="panel-section">
+  <div class="panel-header-title">
     <h3>Panel de control</h3>
-    <p>acceso rapido para la gestion</p>
+    <p>Acceso rápido para la gestión</p>
   </div>
+
   <div class="cards-container">
     <div class="card">
-      <img src="/static/img/cachoneta.png" height="40" width="40" alt="" />
-      <a href="{{url_for('agregar_producto')}}">
-        <h6>Agregar producto</h6>
-      </a>
-      <p>Incorpora nuevas frutas y verduras al catalogo general.</p>
+      <div class="card-icon-wrapper icon-green">➕</div>
+      <h6>Agregar producto</h6>
+      <p>Incorpora nuevas frutas y verduras al catálogo general.</p>
+      <a href="{{url_for('agregar_producto')}}" class="card-action-link">Gestionar ➔</a>
     </div>
+
     <div class="card">
-      <img src="/static/img/cachoneta.png" height="40" width="40" alt="" />
-      <a href="{{url_for('mostrar_productos')}}">
-        <h6>Lista de productos</h6>
-      </a>
-      <p>Visualiza el catalogo completo.</p>
+      <div class="card-icon-wrapper icon-yellow">📦</div>
+      <h6>Lista de productos</h6>
+      <p>Visualiza el catálogo completo.</p>
+      <a href="{{url_for('mostrar_productos')}}" class="card-action-link">Ver catálogo ➔</a>
     </div>
-    <div class="card">
-      <img src="/static/img/cachoneta.png" height="40" width="40" alt="" />
-      <a href="{{url_for('comprar_productos')}}">
-        <h6>Realizar compra</h6>
-      </a>
+
+    <div class="card card-dark">
+      <div class="card-icon-wrapper icon-light-green">📟</div>
+      <h6>Realizar compra</h6>
       <p>Punto de venta para registrar transacciones de clientes.</p>
+      <a href="{{url_for('comprar_productos')}}" class="card-action-link">Ir a caja ➔</a>
     </div>
+    
     <div class="card">
-      <img src="/static/img/cachoneta.png" height="40" width="40" alt="" />
-      <a href="{{ url_for('vista_editar_inventario') }}">
-        <h6>Editar Stock</h6>
-      </a>
-      <p>Actualiza cantidades y precios de forma masiva.</p>
-    </div>
-    <div class="card">
-      <img src="/static/img/cachoneta.png" height="40" width="40" alt="" />
-      <a href="{{ url_for('vista_eliminar_inventario') }}">
-        <h6>Eliminar producto</h6>
-      </a>
-      <p>Remueve productos obsoletos o fuera de temporada.</p>
-    </div>
-    <div class="card">
-      <img src="/static/img/cachoneta.png" height="40" width="40" alt="" />
-      <a href="{{url_for('ventas')}}">
-        <h6>Control de ventas</h6>
-      </a>
+      <div class="card-icon-wrapper icon-yellow">📊</div>
+      <h6>Control de ventas</h6>
       <p>Analiza el rendimiento diario de tu local.</p>
+      <a href="{{url_for('ventas')}}" class="card-action-link">Ver reportes ➔</a>
     </div>
   </div>
 </main>
