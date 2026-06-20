@@ -1,41 +1,127 @@
 {% extends 'base.html' %} 
-{% block title %}Comprar un producto{% endblock %} 
-{%block content %}
-<a href="/" class="nav-link">&larr; Volver al Inicio</a>
-<div class="card">
-  <h2>Inventario de Productos</h2>
-  <table>
-    <tr>
-      <th>Nombre</th>
-      <th>Precio</th>
-      <th>Stock</th>
-      <th>Acciones</th>
-    </tr>
 
-    {% for p in productos %}
-    <tr>
-      <td>{{ p.nombre }}</td>
-      <td>${{ p.precio }}</td>
-      <td>
-        {% if p.stock <= 10 %}
-        <span class="critico">{{ p.stock }}</span>
-        {% else %} {{ p.stock }} {% endif %}
-      </td>
-      <td style="display: flex; align-items: center">
-        <form action="/vender" method="POST" class="inline-form">
-          <input type="hidden" name="nombre" value="{{ p.nombre }}" />
-          <input
-            type="number"
-            name="cantidad"
-            min="1"
-            placeholder="Cant"
-            required
-          />
-          <button type="submit"><img width="20" height="20" src="/static/icons/buy-icon.png" alt="buy"></button>
-        </form>
-      </td>
-    </tr>
-    {% endfor %}
-  </table>
+{% block title %}Nueva Venta{% endblock %} 
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/comprar.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="comprar-page-container">
+  
+  <div class="comprar-header">
+    <div class="header-text">
+      <h1>Realizar Nueva Venta</h1>
+      <p>Selecciona los productos frescos del día para añadir al carrito de compras.</p>
+    </div>
+    <a href="{{ url_for('index') }}" class="nav-link-back">&larr; Volver al Inicio</a>
+  </div>
+
+  <div class="comprar-main-layout">
+    
+    <div class="productos-selection-column">
+      <div class="table-card">
+        <table class="inventario-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Precio/KG</th>
+              <th>Stock Disp.</th>
+              <th class="text-center">Añadir</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in productos %}
+            <tr class="comprar-product-row" data-nombre="{{ p.nombre }}" data-precio="{{ p.precio }}" data-stock="{{ p.stock }}">
+              <td>
+                <div class="product-info-cell">
+                  <div class="product-img-wrapper">
+                    <img src="/static/img/{{ p.nombre | lower | replace(' ', '_') }}.png" onerror="this.src='/static/img/cachoneta.png'" alt="{{ p.nombre }}">
+                  </div>
+                  <div class="product-meta">
+                    <span class="product-name">{{ p.nombre | capitalize }}</span>
+                  </div>
+                </div>
+              </td>
+              <td class="price-cell">${{ p.precio }}</td>
+              <td>
+                {% if p.stock <= 5 %}
+                  <span class="stock-badge status-critico">{{ p.stock }} kg</span>
+                {% else %}
+                  <span class="stock-badge status-normal">{{ p.stock }} kg</span>
+                {% endif %}
+              </td>
+              <td class="text-center">
+                <div class="add-action-container">
+                  <input type="number" class="qty-selector-input" value="1" min="1" max="{{ p.stock }}">
+                  <button type="button" class="btn-add-to-cart" title="Añadir al carrito">🛒</button>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+        <div class="table-footer">
+          <span>Mostrando {{ productos | length }} de {{ total_count }} productos</span>
+          <div class="pagination-sim">
+            {% if current_page > 1 %}
+              <a href="{{ url_for('comprar_productos', page=current_page - 1) }}" class="pag-btn">&lt;</a>
+            {% endif %}
+            {% for page_num in range(1, total_pages + 1) %}
+              <a href="{{ url_for('comprar_productos', page=page_num) }}" class="pag-btn {% if page_num == current_page %}active{% endif %}">{{ page_num }}</a>
+            {% endfor %}
+            {% if current_page < total_pages %}
+              <a href="{{ url_for('comprar_productos', page=current_page + 1) }}" class="pag-btn">&gt;</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carrito-sidebar-column" id="carritoDrawer">
+      <div class="carrito-drawer-overlay" id="carritoOverlay"></div>
+      
+      <div class="card-carrito-container">
+        <div class="carrito-header-title">
+          <h3>🛒 Carrito de Compra</h3>
+          <div class="carrito-header-actions">
+            <button type="button" class="btn-clear-cart" id="clearCartBtn">Limpiar Todo</button>
+            <button type="button" class="btn-close-cart-drawer hide-desktop" id="closeCartDrawerBtn">&times;</button>
+          </div>
+        </div>
+
+        <div id="carritoAlertContainer"></div>
+
+        <div class="carrito-items-list" id="cartItemsList">
+          </div>
+
+        <div class="carrito-summary-box">
+          <div class="summary-line">
+            <span>Subtotal</span>
+            <span id="summarySubtotal">$0.00</span>
+          </div>
+          <div class="summary-line">
+            <span>IVA (10%)</span>
+            <span id="summaryIva">$0.00</span>
+          </div>
+          <div class="summary-line total-line">
+            <span>Total Factura</span>
+            <span id="summaryTotal">$0.00</span>
+          </div>
+        </div>
+
+        <button type="button" class="btn-confirm-checkout" id="confirmCheckoutBtn">✔ Confirmar Venta</button>
+      </div>
+    </div>
+
+  </div>
 </div>
+
+<button type="button" class="btn-cart-floating hide-desktop" id="openCartDrawerBtn">
+  <span class="floating-cart-icon">🛒</span>
+  <span class="floating-cart-badge" id="floatingCartBadge">0</span>
+</button>
+
+<script src="{{ url_for('static', filename='js/comprar.js') }}"></script>
 {% endblock %}
