@@ -1,39 +1,102 @@
 {% extends 'base.html' %} 
 {% block title %}Agregar un producto{% endblock %} 
-{%block content %}
-<a href="/" class="nav-link">&larr; Volver al Inicio</a>
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/agregar.css') }}">
+{% endblock %}
+{% block content %}
+<div class="agregar-page-container">
+  
+  <div class="form-column">
+    <div class="card basic-form-card">
+      
+      <div class="form-card-header">
+        <div>
+          <h2>Agregar Producto</h2>
+          <p class="form-subtitle">Ingresa los datos del nuevo artículo para incorporarlo al sistema.</p>
+        </div>
+        <a href="/productos" class="nav-link-back">&larr; Volver al Inventario</a>
+      </div>
+      
+      {% if error %}
+        <div class="alert alert-{{ tipo }}">
+          <span class="alert-icon">{% if tipo == 'danger' %}🛑{% else %}⚠️{% endif %}</span>
+          <div class="alert-message">{{ error }}</div>
+        </div>
+      {% endif %}
+      
+      <form action="/agregar" method="POST" class="styled-form">
+        <div class="form-group">
+          <label for="nombre">Nombre del Producto</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            placeholder="Ej: Tomate Pera o Manzana"
+            value="{{ nombre if nombre else '' }}"
+            required
+          />
+        </div>
 
-<div class="card">
-  <h2>Agregar Producto</h2>
-  {% if error %}
-    <div class="alert {{tipo}}">
-      {{ error }}
+        <div class="form-group">
+          <label for="precio">Precio por KG ($)</label>
+          <input
+            type="number"
+            step="0.01"
+            id="precio"
+            name="precio"
+            placeholder="0.00"
+            value="{{ precio if precio else '' }}"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="stock">Stock Inicial (KG)</label>
+          <input
+            type="number"
+            id="stock"
+            name="stock"
+            placeholder="0"
+            value="{{ stock if stock else '' }}"
+            required
+          />
+        </div>
+
+        <button class="add-btn" type="submit">✨ Registrar Artículo</button>
+      </form>
     </div>
-  {% endif %}
-  <form action="/agregar" method="POST">
-    <input
-      type="text"
-      name="nombre"
-      placeholder="Nombre del producto"
-      value="{{ nombre if nombre else '' }}"
-      required
-    />
-    <input
-      type="number"
-      step="0.01"
-      name="precio"
-      placeholder="Precio ($)"
-      value="{{ precio if precio else '' }}"
-      required
-    />
-    <input
-      type="number"
-      name="stock"
-      placeholder="Cantidad en Stock"
-      value="{{ stock if stock else '' }}"
-      required
-    />
-    <button class="add-btn" type="submit">Agregar Producto</button>
-  </form>
+  </div>
+
+  <div class="info-sidebar-column">
+    <div class="info-sidebar-card">
+      <h3>Panel de Control</h3>
+      <p class="sidebar-intro">Recuerda mantener los datos actualizados para optimizar el control de stock en el mostrador.</p>
+      
+      <div class="sidebar-status-item">
+        <div class="status-icon">📦</div>
+        <div class="status-details">
+          <h4>Nomenclatura Estándar</h4>
+          <p>Al guardar el producto, el sistema le asignará automáticamente un identificador único correlativo.</p>
+        </div>
+      </div>
+
+      <div class="sidebar-status-item">
+        <div class="status-icon">🍏</div>
+        <div class="status-details">
+          <h4>Imágenes de Sistema</h4>
+          <p>Se vinculará automáticamente una ilustración basada en el nombre ingresado. Si no existe, se asignará la imagen por defecto.</p>
+        </div>
+      </div>
+
+      <div class="sidebar-status-item alert-box-item">
+        <div class="status-icon">⚠️</div>
+        <div class="status-details">
+          <h4>Control de Stock</h4>
+          <p>Los artículos con un stock inicial igual o menor a 5 kg se marcarán automáticamente bajo la alerta de <strong>"Bajo Stock"</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 {% endblock %}
