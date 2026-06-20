@@ -3,6 +3,7 @@ from flask import render_template
 from flask import request
 from flask import redirect
 from flask import url_for
+from flask import jsonify
 
 from services.verduleria_service import VerduleriaService
 
@@ -26,7 +27,6 @@ def index():
     )
 
 
-@app.route("/agregar", methods=["GET","POST"])
 @app.route("/agregar", methods=["GET","POST"])
 def agregar_producto():
     if request.method == "POST":
@@ -59,36 +59,53 @@ def agregar_producto():
         return redirect(url_for("index"))
 
     return render_template("agregar.html")
-    
 
 @app.route("/comprar")
 def comprar_productos():
-    productos = service.obtener_productos()
+    todos_productos = service.obtener_productos()
     
+    # Segmentación idéntica: 6 por página
+    PER_PAGE = 6
+    page = request.args.get('page', 1, type=int)
+    total_productos = len(todos_productos)
+    
+    start = (page - 1) * PER_PAGE
+    end = start + PER_PAGE
+    productos_paginados = todos_productos[start:end]
+    
+    total_pages = (total_productos + PER_PAGE - 1) // PER_PAGE if total_productos > 0 else 1
+
     return render_template(
         "comprar.html",
-        productos=productos
+        productos=productos_paginados,
+        current_page=page,
+        total_pages=total_pages,
+        total_count=total_productos
     )
 
-@app.route("/inventario/editar")
-def vista_editar_inventario():
-    lista_productos = service.obtener_productos() 
+@app.route("/vender_lote", methods=["POST"])
+def vender_lote():
+    data = request.get_json()
+    items = data.get("items", [])
     
-    return render_template(
-        "inventario.html", 
-        productos=lista_productos, 
-        accion="editar"
-    )
+    if not items:
+        return jsonify({"success": False, "error": "El carrito está vacío."}), 400
 
-@app.route("/inventario/eliminar")
-def vista_eliminar_inventario():
-    lista_productos = service.obtener_productos()
-    
-    return render_template(
-        "inventario.html", 
-        productos=lista_productos, 
-        accion="eliminar"
-    )
+    # Procesamos uno por uno en tu servicio existente
+    for item in items:
+        nombre = item.get("nombre")
+        cantidad = int(item.get("cantidad"))
+        
+        # Validamos stock antes de procesar
+        producto = service.buscar_producto(nombre)
+        if not producto or producto.stock < cantidad:
+            return jsonify({"success": False, "error": f"Stock insuficiente para {nombre}."}), 400
+
+    # Si todos tienen stock, impactamos las ventas de manera definitiva
+    for item in items:
+        service.vender_producto(item["nombre"], int(item["cantidad"]))
+
+    return jsonify({"success": True, "redirect": url_for("ventas")})
 
 @app.route("/editar/<nombre>", methods=["GET", "POST"])
 def editar_producto(nombre):
@@ -97,9 +114,7 @@ def editar_producto(nombre):
         stock_raw = request.form.get("stock", "")
 
         if not precio_raw or not stock_raw:
-            # Producto temporal para no perder los datos ingresados
-            producto_temp = {"nombre": nombre, "precio": precio_raw, "stock": stock_raw}
-            return render_template("editar.html", producto=producto_temp, error="Todos los campos son obligatorios.", tipo="danger")
+            return jsonify({"error": "Todos los campos son obligatorios.", "tipo": "danger"}), 400
 
         # Validación de tipos de datos y valores positivos
         try:
@@ -107,25 +122,22 @@ def editar_producto(nombre):
             stock = int(stock_raw)
 
             if precio <= 0 or stock < 0:
-                producto_temp = {"nombre": nombre, "precio": precio_raw, "stock": stock_raw}
-                return render_template("editar.html", producto=producto_temp, error="El precio debe ser mayor a 0 y el stock no puede ser negativo.", tipo="warning")
+                return jsonify({"error": "El precio debe ser mayor a 0 y el stock no puede ser negativo.", "tipo": "warning"}), 400
                 
         except ValueError:
-            producto_temp = {"nombre": nombre, "precio": precio_raw, "stock": stock_raw}
-            return render_template("editar.html", producto=producto_temp, error="El precio y el stock deben ser números válidos.", tipo="danger")
+            return jsonify({"error": "El precio y el stock deben ser números válidos.", "tipo": "danger"}), 400
 
-        # Si paso las validaciones modifico el producto
+        # Si pasó todas las validaciones modifico el producto con éxito
         service.modificar_producto(nombre, precio, stock)
-        return redirect(url_for("index"))
+        
+        # Le avisamos a JS que todo salió perfecto para que pueda redireccionar
+        return jsonify({"success": True, "redirect": url_for("mostrar_productos")})
 
     producto = service.buscar_producto(nombre)
-
     if producto is None:
-        return redirect(url_for("index"))
+        return redirect(url_for("mostrar_productos"))
 
-    return render_template("editar.html", producto=producto
-    )
-
+    return render_template("editar.html", producto=producto)
 
 
 @app.route("/eliminar/<nombre>")
@@ -133,7 +145,7 @@ def eliminar_producto(nombre):
 
     service.eliminar_producto(nombre)
 
-    return redirect(url_for("index"))
+    return redirect(url_for("mostrar_productos"))
 
 
 @app.route("/vender", methods=["POST"])
@@ -151,21 +163,55 @@ def vender_producto():
 
 @app.route("/productos")
 def mostrar_productos():
-    productos = service.obtener_productos()
+    todos_productos = service.obtener_productos()
+    
+    # Configuración de paginación (6 por página)
+    PER_PAGE = 6
+    page = request.args.get('page', 1, type=int)
+    total_productos = len(todos_productos)
+    
+    # Segmentación de la lista en porciones
+    start = (page - 1) * PER_PAGE
+    end = start + PER_PAGE
+    productos_paginados = todos_productos[start:end]
+    
+    # Cálculo total de páginas (redondeo hacia arriba)
+    total_pages = (total_productos + PER_PAGE - 1) // PER_PAGE if total_productos > 0 else 1
 
     return render_template(
         "productos.html",
-        productos=productos
+        productos=productos_paginados,
+        current_page=page,
+        total_pages=total_pages,
+        total_count=total_productos
     )
 
 @app.route("/ventas")
 def ventas():
-
-    ventas = service.obtener_ventas()
+    lista_ventas = service.obtener_ventas()
+    total_acumulado = service.obtener_total_ventas()
+    ticket_medio = total_acumulado / len(lista_ventas) if lista_ventas else 0
+    
+    # Configuración de paginación (6 por página)
+    PER_PAGE = 4
+    page = request.args.get('page', 1, type=int)
+    total_ventas_count = len(lista_ventas)
+    
+    # Segmentación de la lista en porciones
+    start = (page - 1) * PER_PAGE
+    end = start + PER_PAGE
+    ventas_paginadas = lista_ventas[start:end]
+    
+    total_pages = (total_ventas_count + PER_PAGE - 1) // PER_PAGE if total_ventas_count > 0 else 1
 
     return render_template(
         "ventas.html",
-        ventas=ventas
+        ventas=ventas_paginadas,
+        total_ventas=total_acumulado,
+        ticket_medio=ticket_medio,
+        current_page=page,
+        total_pages=total_pages,
+        total_count=total_ventas_count
     )
 
 
