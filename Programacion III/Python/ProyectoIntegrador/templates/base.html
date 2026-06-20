@@ -1,24 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}La Cachoneta{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %} - La Cachoneta</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    {% block styles %}{% endblock %}
+  </head>
+  <body>
+    <div class="app-layout">
+      <button class="hamburger-btn" aria-label="Abrir menú" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
-    <div class="container">
-        <header>
-            <h1>La cachoneta</h1>
-            <p>Proyecto integrador python</p>
-        </header>
-
-        <main>
-            {% block content %}
-            {% endblock %}
-        </main>
+      <aside class="sidebar">
+        <button class="close-sidebar-btn" type="button">✕</button>
+        <div class="sidebar-brand">
+          <div class="brand-icon">🌱</div>
+          <h2>La Cachoneta</h2>
+          <p>Gestión de Verdulería</p>
+        </div>
+        <nav class="sidebar-menu">
+          <a href="/" class="menu-item active">🏠 Inicio</a>
+          <a href="{{ url_for('mostrar_productos') }}" class="menu-item"
+            >📦 Productos</a
+          >
+          <a href="{{ url_for('comprar_productos') }}" class="menu-item"
+            >🛒 Nueva Venta</a
+          >
+        </nav>
+        <div class="sidebar-footer">
+          <p> &copy; La cachoneta - 2026</p>
+        </div>
+      </aside>
+      <div class="overlay"></div>
+      <div class="main-wrapper">
+        <div class="content-body">{% block content %}{% endblock %}</div>
+      </div>
     </div>
 
-</body>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
 </html>
