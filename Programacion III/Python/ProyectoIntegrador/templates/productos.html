@@ -1,26 +1,150 @@
 {% extends 'base.html' %} 
+
 {% block title %}Lista de productos{% endblock %} 
-{%block content %}
-<a href="/" class="nav-link">&larr; Volver al Inicio</a>
 
-<h1>Productos</h1>
-<div class="card">
-  <table>
-    <tr>
-      <th>Nombre</th>
-      <th>Precio</th>
-      <th>Stock</th>
-    </tr>
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/productos.css') }}">
+{% endblock %}
 
-    {% for p in productos %}
+{% block content %}
+<div class="inventario-page-wrapper">
+  
+  <div class="inventario-header">
+    <div class="header-text">
+      <h1>Inventario de Productos</h1>
+      <p>Visualiza y gestiona el stock de frutas y verduras frescas de la temporada.</p>
+    </div>
+    
+    <div class="header-actions-right">
+      <a href="{{ url_for('agregar_producto') }}" class="btn-add-product">
+        <span>➕</span> Add New Product
+      </a>
+      <a href="{{ url_for('index') }}" class="nav-link-back">&larr; Volver al Inicio</a>
+    </div>
+  </div>
 
-    <tr>
-      <td>{{ p.nombre }}</td>
-      <td>${{ p.precio }}</td>
-      <td>{{ p.stock }}</td>
-    </tr>
+  <div class="inventario-container">
+    
+    <div class="main-table-wrapper">
+      <div class="table-card">
+        <table class="inventario-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Precio/KG</th>
+              <th>Stock</th>
+              <th class="text-center hide-mobile">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in productos %}
+            <tr class="product-row" data-id="VEG-{{ "%03d" | format(loop.index + (current_page - 1) * 6) }}" data-nombre="{{ p.nombre }}" data-precio="{{ p.precio }}" data-stock="{{ p.stock }}">
+              <td>
+                <div class="product-info-cell">
+                  <div class="product-img-wrapper">
+                    <img src="/static/img/cachoneta.png" alt="{{ p.nombre }}">
+                  </div>
+                  <div class="product-meta">
+                    <span class="product-name">{{ p.nombre }}</span>
+                  </div>
+                </div>
+              </td>
+              
+              <td class="price-cell">${{ p.precio }}</td>
+              
+              <td>
+                {% if p.stock == 0 %}
+                <div class="stock-status status-out" data-status="out">
+                  <span class="status-dot"></span> <span class="status-text">Sin Stock</span>
+                </div>
+                {% elif p.stock <= 5 %}
+                  <div class="stock-status status-low" data-status="low">
+                    <span class="status-dot"></span> <span class="status-text">Bajo Stock</span> <small>({{ p.stock }} kg)</small>
+                  </div>
+                {% else %}
+                  <div class="stock-status status-in" data-status="in">
+                    <span class="status-dot"></span> <span class="status-text">En Stock</span> <small>({{ p.stock }} kg)</small>
+                  </div>
+                {% endif %}
+              </td>
+              
+              <td class="text-center hide-mobile">
+                <div class="actions-wrapper">
+                  <button type="button" class="action-btn edit-btn" title="Editar">✏️</button>
+                  <a href="{{ url_for('eliminar_producto', nombre=p.nombre) }}" class="action-btn delete-btn" title="Eliminar" onclick="return confirm('¿Seguro querés eliminar este producto?');">🗑️</a>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+        <div class="table-footer">
+          <span>Mostrando {{ productos | length }} de {{ total_count }} productos</span>
+          <div class="pagination-sim">
+            {% if current_page > 1 %}
+              <a href="{{ url_for('mostrar_productos', page=current_page - 1) }}" class="pag-btn">&lt;</a>
+            {% endif %}
+            
+            {% for page_num in range(1, total_pages + 1) %}
+              <a href="{{ url_for('mostrar_productos', page=page_num) }}" class="pag-btn {% if page_num == current_page %}active{% endif %}">{{ page_num }}</a>
+            {% endfor %}
+            
+            {% if current_page < total_pages %}
+              <a href="{{ url_for('mostrar_productos', page=current_page + 1) }}" class="pag-btn">&gt;</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
 
-    {% endfor %}
-  </table>
+    <div class="action-drawer" id="actionDrawer">
+      <div class="drawer-overlay" id="drawerOverlay"></div>
+      <div class="drawer-content">
+        <div class="drawer-handle"></div>
+        
+        <div class="drawer-product-header">
+          <div class="drawer-img-wrapper">
+            <img id="drawerProductImg" src="/static/img/cachoneta.png" alt="">
+          </div>
+          <div class="drawer-meta">
+            <h2 id="drawerProductName">Nombre del Producto</h2>
+          </div>
+        </div>
+
+        <div id="drawerAlertContainer"></div>
+
+        <div class="drawer-section">
+          <label class="section-label">PRECIO POR KG ($)</label>
+          <div class="quantity-counter">
+            <button type="button" class="counter-btn" id="priceMinusBtn">−</button>
+            <input type="number" id="priceInput" value="0" min="1">
+            <button type="button" class="counter-btn" id="pricePlusBtn">＋</button>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <label class="section-label">STOCK ACTUAL (KG)</label>
+          <div class="quantity-counter">
+            <button type="button" class="counter-btn" id="stockMinusBtn">−</button>
+            <input type="number" id="stockInput" value="0" min="0">
+            <button type="button" class="counter-btn" id="stockPlusBtn">＋</button>
+          </div>
+        </div>
+
+        <div class="drawer-actions">
+          <button type="button" class="btn-drawer btn-drawer-cancel" id="closeDrawerBtn">Cancelar</button>
+          <button type="button" class="btn-drawer btn-drawer-confirm" id="confirmDrawerBtn">Confirmar Cambios</button>
+        </div>
+        
+        <div class="drawer-danger-zone">
+          <a href="#" id="drawerDeleteLink" class="btn-drawer-delete" onclick="return confirm('¿Seguro querés eliminar este producto?');">🗑️ Eliminar Producto Definitivamente</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
+
+<script src="{{ url_for('static', filename='js/productos.js') }}"></script>
 {% endblock %}
