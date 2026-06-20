@@ -1,25 +1,83 @@
 {% extends 'base.html' %} 
+
 {% block title %}Historial de ventas{% endblock %} 
-{%block content %} 
-<a href="/" class="nav-link">&larr; Volver al Inicio</a>
 
-<div class="card">
-    <h1>Historial de Ventas</h1>
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ventas.css') }}">
+{% endblock %}
 
-    <table>
-        <tr>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Total</th>
-        </tr>
+{% block content %}
+<div class="ventas-page-wrapper">
+  
+  <div class="ventas-header">
+    <div class="header-text">
+      <h1>Historial de Transacciones</h1>
+      <p>Monitorea los ingresos y el flujo de caja de la frutería en tiempo real.</p>
+    </div>
+    <a href="{{ url_for('index') }}" class="nav-link-back">&larr; Volver al Inicio</a>
+  </div>
 
-        {% for venta in ventas %}
-        <tr>
-            <td>{{ venta.producto }}</td>
-            <td>{{ venta.cantidad }}</td>
-            <td style="font-weight: bold; color: var(--primary-color);">${{ venta.total }}</td>
-        </tr>
+  <div class="kpi-container">
+    <div class="kpi-card">
+      <div class="kpi-icon-wrapper bg-green">💵</div>
+      <span class="kpi-label">VENTAS TOTALES</span>
+      <h2 class="kpi-value">${{ "%.2f" | format(total_ventas) }}</h2>
+    </div>
+
+    <div class="kpi-card">
+      <div class="kpi-icon-wrapper bg-yellow">🧮</div>
+      <span class="kpi-label">TICKET MEDIO</span>
+      <h2 class="kpi-value">${{ "%.2f" | format(ticket_medio) }}</h2>
+    </div>
+
+    <div class="kpi-card">
+      <div class="kpi-icon-wrapper bg-dark">📦</div>
+      <span class="kpi-label">OPERACIONES</span>
+      <h2 class="kpi-value">{{ total_count }} órdenes</h2>
+    </div>
+  </div>
+
+  <div class="transactions-container">
+    <h3 class="section-title">Transacciones Recientes</h3>
+    
+    <div class="transactions-list">
+      {% for v in ventas %}
+      <div class="transaction-item">
+        <div class="item-left">
+          <div class="transaction-img-wrapper">
+            <img src="/static/img/{{ v.producto | lower | replace(' ', '_') }}.png" onerror="this.src='/static/img/cachoneta.png'" alt="{{ v.producto }}">
+          </div>
+          <div class="transaction-meta">
+            <h4 class="transaction-product-name">{{ v.producto | capitalize }}</h4>
+            <span class="transaction-qty">Cantidad: <strong>{{ v.cantidad }} kg</strong></span>
+          </div>
+        </div>
+
+        <div class="item-right">
+          <span class="transaction-total">${{ "%.2f" | format(v.total) }}</span>
+          <span class="status-badge status-pagado">PAGADO</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="ventas-pagination-wrapper">
+      <span>Mostrando {{ ventas | length }} de {{ total_count }} transacciones</span>
+      <div class="pagination-sim">
+        {% if current_page > 1 %}
+          <a href="{{ url_for('ventas', page=current_page - 1) }}" class="pag-btn">&lt;</a>
+        {% endif %}
+        
+        {% for page_num in range(1, total_pages + 1) %}
+          <a href="{{ url_for('ventas', page=page_num) }}" class="pag-btn {% if page_num == current_page %}active{% endif %}">{{ page_num }}</a>
         {% endfor %}
-    </table>
+        
+        {% if current_page < total_pages %}
+          <a href="{{ url_for('ventas', page=current_page + 1) }}" class="pag-btn">&gt;</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
 </div>
 {% endblock %}
