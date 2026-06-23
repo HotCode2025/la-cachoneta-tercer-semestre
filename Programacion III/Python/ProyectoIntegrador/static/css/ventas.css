@@ -1,31 +1,31 @@
 /* static/css/ventas.css */
 
-.ventas-page-wrapper {
+.ventas-page-wrapper { 
   padding: 1rem 0;
   width: 100%;
 }
 
 /* Cabecera */
-.ventas-header {
+.ventas-header { 
   display: flex;
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 2rem;
 }
 
-.ventas-header h1 {
+.ventas-header h1 { 
   font-size: 2.2rem;
   color: var(--primary-dark, #1e4620);
   font-weight: 700;
   margin-bottom: 0.25rem;
 }
 
-.ventas-header p {
+.ventas-header p { 
   color: var(--text-muted, #64748b);
   font-size: 1rem;
 }
 
-.nav-link-back {
+.nav-link-back { 
   color: var(--primary-brand, #2d6a4f);
   text-decoration: none;
   font-weight: 600;
@@ -40,20 +40,20 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
 }
 
-.nav-link-back:hover {
+.nav-link-back:hover { 
   background-color: #f4f6f3;
   transform: translateY(-1px);
 }
 
 /* --- CONTENEDOR DE BLOQUES KPI (RESPONSIVE) --- */
-.kpi-container {
+.kpi-container { 
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
   margin-bottom: 2.5rem;
 }
 
-.kpi-card {
+.kpi-card { 
   background: #ffffff;
   border: 1px solid var(--border-color, #e2e8f0);
   border-radius: 1.25rem;
@@ -64,7 +64,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
 }
 
-.kpi-icon-wrapper {
+.kpi-icon-wrapper { 
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
@@ -77,17 +77,17 @@
   font-size: 1.2rem;
 }
 
-.bg-green {
+.bg-green { 
   background-color: #e8f5e9;
 }
-.bg-yellow {
+.bg-yellow { 
   background-color: #fffde7;
 }
-.bg-dark {
+.bg-dark { 
   background-color: #f1f5f9;
 }
 
-.kpi-label {
+.kpi-label { 
   font-size: 0.75rem;
   font-weight: 800;
   color: #94a3b8;
@@ -95,7 +95,7 @@
   margin-bottom: 0.5rem;
 }
 
-.kpi-value {
+.kpi-value { 
   font-size: 2rem;
   color: var(--primary-dark, #1e4620);
   font-weight: 800;
@@ -103,24 +103,24 @@
 }
 
 /* --- LISTADO DE TRANSACCIONES --- */
-.transactions-container {
+.transactions-container { 
   width: 100%;
 }
 
-.section-title {
+.section-title { 
   font-size: 1.3rem;
   color: var(--primary-dark, #1e4620);
   font-weight: 700;
   margin-bottom: 1.25rem;
 }
 
-.transactions-list {
+.transactions-list { 
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
 }
 
-.transaction-item {
+.transaction-item {  
   background: #ffffff;
   border: 1px solid var(--border-color, #e2e8f0);
   border-radius: 1.25rem;
@@ -131,18 +131,18 @@
   transition: transform 0.15s ease;
 }
 
-.transaction-item:hover {
+.transaction-item:hover { 
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
 }
 
-.item-left {
+.item-left { 
   display: flex;
   align-items: center;
   gap: 1.25rem;
 }
 
-.transaction-img-wrapper {
+.transaction-img-wrapper { 
   width: 56px;
   height: 56px;
   border-radius: 1rem;
@@ -155,49 +155,43 @@
   flex-shrink: 0;
 }
 
-.transaction-img-wrapper img {
+.transaction-img-wrapper img { 
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.transaction-meta {
+.transaction-meta { 
   display: flex;
   flex-direction: column;
 }
 
-.transaction-id {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #94a3b8;
-}
-
-.transaction-product-name {
+.transaction-product-name { 
   font-size: 1.1rem;
   color: var(--primary-dark, #1e4620);
   font-weight: 700;
   margin: 0.15rem 0;
 }
 
-.transaction-qty {
+.transaction-qty { 
   font-size: 0.85rem;
   color: var(--text-muted, #64748b);
 }
 
-.item-right {
+.item-right { 
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 0.4rem;
 }
 
-.transaction-total {
+.transaction-total { 
   font-size: 1.25rem;
   font-weight: 800;
   color: #1e293b;
 }
 
-.status-badge {
+.status-badge { 
   font-size: 0.7rem;
   font-weight: 800;
   padding: 0.25rem 0.5rem;
@@ -205,12 +199,12 @@
   letter-spacing: 0.03em;
 }
 
-.status-pagado {
+.status-pagado { 
   background-color: #ecfdf5;
   color: #15803d;
 }
 
-.ventas-pagination-wrapper {
+.ventas-pagination-wrapper { 
   margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -225,12 +219,12 @@
   font-weight: 600;
 }
 
-.pagination-sim {
+.pagination-sim { 
   display: flex;
   gap: 0.5rem;
 }
 
-.pag-btn {
+.pag-btn { 
   width: 34px;
   height: 34px;
   border-radius: 50%;
@@ -246,12 +240,12 @@
   transition: all 0.2s ease;
 }
 
-.pag-btn:hover {
+.pag-btn:hover { 
   background-color: #f4f6f3;
   color: var(--primary-dark);
 }
 
-.pag-btn.active {
+.pag-btn.active { 
   background-color: var(--primary-dark, #1e4620);
   color: white !important;
   border-color: var(--primary-dark, #1e4620);
@@ -259,26 +253,26 @@
 
 /* --- MEDIA QUERIES (TABLET Y DESKTOP) --- */
 @media (min-width: 768px) {
-  .ventas-header {
+  .ventas-header {  
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
 
-  .nav-link-back {
+  .nav-link-back { 
     align-self: center;
   }
 
   /* Distribuimos los KPIs en 3 columnas en pantallas grandes */
-  .kpi-container {
+  .kpi-container { 
     flex-direction: row;
   }
 
-  .kpi-card {
+  .kpi-card { 
     flex: 1;
   }
 
-  .ventas-pagination-wrapper {
+  .ventas-pagination-wrapper { 
     flex-direction: row;
     justify-content: space-between;
   }

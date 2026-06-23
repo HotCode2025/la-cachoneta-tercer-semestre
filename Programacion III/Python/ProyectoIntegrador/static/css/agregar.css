@@ -160,7 +160,7 @@
   color: var(--text-main);
   line-height: 1.4;
 }
-.alert-box-item .status-icon {
+.alert-box-item .status-icon { 
   background-color: #fef2f2;
 }
 

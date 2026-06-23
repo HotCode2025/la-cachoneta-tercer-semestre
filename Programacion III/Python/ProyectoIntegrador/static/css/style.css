@@ -190,37 +190,11 @@ body {
 }
 
 /* --- MAIN HEADER --- */
-.main-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: transparent;
-  padding: 1rem 0 2rem 3.5rem; /* Margen para no tapar con la hamburguesa */
-  border-bottom: 1px solid var(--border-color);
-  margin-bottom: 1.5rem;
-}
 
-.header-logo-mobile {
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: var(--primary-dark);
-}
-
-.header-nav {
-  display: none; /* Se oculta en móviles */
-}
-
-.header-actions {
+.header-actions { /* dudo si va o no */
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-
-.search-box input {
-  padding: 0.5rem 1rem;
-  border-radius: 2rem;
-  border: 1px solid var(--border-color);
-  background-color: #eff2ef;
 }
 
 /* --- HERO COMPONENT --- */
@@ -297,7 +271,7 @@ body {
   border-radius: 1rem;
 }
 
-/* --- PANEL SECCIÓN & CARDS --- */
+/* --- PANEL SECCIÓN & CARDS --- */ 
 .panel-header-title {
   margin-bottom: 1.5rem;
   border-left: 4px solid var(--primary-brand);
@@ -391,16 +365,6 @@ body {
   margin-top: auto;
 }
 
-/* --- FOOTER --- */
-.main-footer {
-  text-align: center;
-  padding: 2rem 0;
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  border-top: 1px solid var(--border-color);
-  margin-top: 3rem;
-}
-
 /* --- RESPONSIVE DESIGN (BREAKPOINTS) --- */
 
 @media (min-width: 768px) {
@@ -441,29 +405,8 @@ body {
     display: flex;
   }
 
-  .header-nav {
-    display: flex;
-    gap: 2rem;
-  }
-
-  .header-nav a {
-    text-decoration: none;
-    color: var(--text-muted);
-    font-weight: 600;
-    padding-bottom: 0.5rem;
-  }
-
-  .header-nav a.active {
-    color: var(--primary-dark);
-    border-bottom: 2px solid var(--primary-dark);
-  }
-
   .cards-container {
     grid-template-columns: repeat(3, 1fr);
-  }
-
-  .header-logo-mobile {
-    display: none; /* Usa el logo del sidebar */
   }
 
   .close-sidebar-btn {

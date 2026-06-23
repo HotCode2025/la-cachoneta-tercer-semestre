@@ -1,16 +1,16 @@
 /* static/css/productos.css */
 
-.inventario-page-wrapper {
+.inventario-page-wrapper { 
   padding: 1rem 0;
   width: 100%;
 }
 
-.main-table-wrapper {
+.main-table-wrapper { 
   width: 100%;
 }
 
 /* Cabecera distributiva superior */
-.inventario-header {
+.inventario-header { 
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -18,20 +18,20 @@
   margin-bottom: 2rem;
 }
 
-.inventario-header h1 {
+.inventario-header h1 { 
   font-size: 2.2rem;
   color: var(--primary-dark);
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
-.inventario-header p {
+.inventario-header p { 
   color: var(--text-muted);
   font-size: 1rem;
 }
 
 /* Contenedor flexible de acciones de cabecera */
-.header-actions-right {
+.header-actions-right { 
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -41,7 +41,7 @@
 }
 
 /* Botón volver */
-.nav-link-back {
+.nav-link-back { 
   color: var(--primary-brand, #2d6a4f);
   text-decoration: none;
   font-weight: 600;
@@ -58,14 +58,14 @@
   justify-content: center;
 }
 
-.nav-link-back:hover {
+.nav-link-back:hover { 
   background-color: #f4f6f3;
   color: var(--primary-dark);
   text-decoration: none;
   transform: translateY(-1px);
 }
 
-.btn-add-product {
+.btn-add-product { 
   background-color: var(--primary-dark);
   color: #ffffff;
   padding: 0.85rem 1.5rem;
@@ -83,14 +83,14 @@
   white-space: nowrap;
 }
 
-.btn-add-product:hover {
+.btn-add-product:hover { 
   background-color: var(--primary-brand);
   transform: translateY(-1px);
   text-decoration: none;
 }
 
 /* Contenedor principal de tabla */
-.table-card {
+.table-card { 
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 1.5rem;
@@ -99,13 +99,13 @@
   width: 100%;
 }
 
-.inventario-table {
+.inventario-table { 
   width: 100%;
   border-collapse: collapse;
   text-align: left;
 }
 
-.inventario-table th {
+.inventario-table th { 
   background-color: #f4f6f3;
   color: var(--text-muted);
   font-weight: 700;
@@ -116,29 +116,29 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-.inventario-table td {
+.inventario-table td { 
   padding: 1.25rem 1.5rem;
   border-bottom: 1px solid var(--border-color);
   vertical-align: middle;
 }
 
 /* Filas clickeables interactivas */
-.product-row {
+.product-row { 
   cursor: pointer;
   transition: background-color 0.15s ease;
 }
-.product-row:hover {
+.product-row:hover { 
   background-color: #fcfefe;
 }
 
 /* Celda Producto compleja con imágen */
-.product-info-cell {
+.product-info-cell { 
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.product-img-wrapper {
+.product-img-wrapper { 
   width: 52px;
   height: 52px;
   border-radius: 0.9rem;
@@ -150,31 +150,24 @@
   border: 1px solid var(--border-color);
 }
 
-.product-img-wrapper img {
+.product-img-wrapper img { 
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.product-meta {
+.product-meta { 
   display: flex;
   flex-direction: column;
 }
 
-.product-name {
+.product-name { 
   font-weight: 700;
   color: var(--primary-dark);
   font-size: 1.1rem;
 }
 
-.product-ref {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin-top: 0.15rem;
-  font-weight: 600;
-}
-
-.price-cell {
+.price-cell { 
   font-weight: 700;
   color: var(--text-main);
   font-size: 1.1rem;
@@ -182,7 +175,7 @@
 }
 
 /* Estados de Stock */
-.stock-status {
+.stock-status { 
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -190,38 +183,38 @@
   font-size: 0.95rem;
 }
 
-.status-dot {
+.status-dot { 
   width: 8px;
   height: 8px;
   border-radius: 50%;
 }
 
-.status-in {
+.status-in { 
   color: #1e4620;
 }
-.status-in .status-dot {
+.status-in .status-dot { 
   background-color: #2d6a4f;
 }
-.status-low {
+.status-low { 
   color: #ef4444;
 }
-.status-low .status-dot {
+.status-low .status-dot { 
   background-color: #ef4444;
 }
-.status-out {
+.status-out { 
   color: #6b7280;
 }
-.status-out .status-dot {
+.status-out .status-dot { 
   background-color: #6b7280;
 }
 
 /* Acciones en escritorio */
-.actions-wrapper {
+.actions-wrapper { 
   display: flex;
   gap: 0.75rem;
   justify-content: center;
 }
-.action-btn {
+.action-btn { 
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -235,7 +228,7 @@
 }
 
 /* Footer de paginación */
-.table-footer {
+.table-footer { 
   padding: 1.25rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -246,11 +239,11 @@
   font-size: 0.9rem;
   font-weight: 600;
 }
-.pagination-sim {
+.pagination-sim { 
   display: flex;
   gap: 0.5rem;
 }
-.pag-btn {
+.pag-btn { 
   width: 34px;
   height: 34px;
   border-radius: 50%;
@@ -262,17 +255,17 @@
   justify-content: center;
   cursor: pointer;
 }
-.pag-btn.active {
+.pag-btn.active { 
   background-color: var(--primary-dark);
   color: white;
   border-color: var(--primary-dark);
 }
-.text-center {
+.text-center { 
   text-align: center;
 }
 
 /* --- COMPORTAMIENTO POR DEFECTO DEL DRAWER (MOBILE) --- */
-.action-drawer {
+.action-drawer { 
   position: fixed;
   top: 0;
   bottom: 0;
@@ -283,11 +276,11 @@
   transition: visibility 0.3s;
 }
 
-.action-drawer.open {
+.action-drawer.open { 
   visibility: visible;
 }
 
-.drawer-overlay {
+.drawer-overlay { 
   position: absolute;
   top: 0;
   bottom: 0;
@@ -299,11 +292,11 @@
   transition: opacity 0.3s ease;
 }
 
-.action-drawer.open .drawer-overlay {
+.action-drawer.open .drawer-overlay { 
   opacity: 1;
 }
 
-.drawer-content {
+.drawer-content {  
   position: absolute;
   bottom: 0;
   left: 0;
@@ -320,11 +313,11 @@
   box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.08);
 }
 
-.action-drawer.open .drawer-content {
+.action-drawer.open .drawer-content { 
   transform: translateY(0);
 }
 
-.drawer-handle {
+.drawer-handle { 
   width: 40px;
   height: 5px;
   background-color: #cbd5e1;
@@ -333,7 +326,7 @@
   margin-bottom: -0.5rem;
 }
 
-.drawer-product-header {
+.drawer-product-header { 
   display: flex;
   align-items: center;
   gap: 1.25rem;
@@ -341,30 +334,25 @@
   padding-bottom: 1rem;
 }
 
-.drawer-img-wrapper {
+.drawer-img-wrapper { 
   width: 70px;
   height: 70px;
   border-radius: 1rem;
   overflow: hidden;
   border: 1px solid var(--border-color);
 }
-.drawer-img-wrapper img {
+.drawer-img-wrapper img { 
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.drawer-meta h2 {
+.drawer-meta h2 { 
   font-size: 1.4rem;
   color: var(--primary-dark);
   font-weight: 700;
 }
-.drawer-meta span {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  font-weight: 600;
-}
 
-.section-label {
+.section-label { 
   font-size: 0.75rem;
   font-weight: 800;
   color: var(--text-muted);
@@ -374,7 +362,7 @@
 }
 
 /* Modificador de cantidades numéricas */
-.quantity-counter {
+.quantity-counter { 
   display: flex;
   background: white;
   border: 1px solid var(--border-color);
@@ -384,7 +372,7 @@
   justify-content: space-between;
 }
 
-.counter-btn {
+.counter-btn { 
   width: 60px;
   height: 50px;
   background: var(--accent-bright);
@@ -395,7 +383,7 @@
   color: var(--primary-dark);
 }
 
-.quantity-counter input {
+.quantity-counter input { 
   border: none;
   text-align: center;
   font-size: 1.8rem;
@@ -405,12 +393,12 @@
   width: 100%;
 }
 
-.drawer-actions {
+.drawer-actions { 
   display: flex;
   gap: 1rem;
   margin-top: 0.5rem;
 }
-.btn-drawer {
+.btn-drawer { 
   flex: 1;
   padding: 1rem;
   border-radius: 2rem;
@@ -420,26 +408,26 @@
   border: none;
   text-align: center;
 }
-.btn-drawer-cancel {
+.btn-drawer-cancel { 
   background: white;
   border: 1px solid var(--border-color);
   color: var(--primary-dark);
 }
-.btn-drawer-confirm {
+.btn-drawer-confirm { 
   background: var(--primary-dark);
   color: white;
 }
-.drawer-danger-zone {
+.drawer-danger-zone { 
   text-align: center;
   margin-top: 0.25rem;
 }
-.btn-drawer-delete {
+.btn-drawer-delete { 
   color: #ef4444;
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 700;
 }
-.drawer-section {
+.drawer-section { 
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -447,7 +435,7 @@
 }
 
 /* --- COMPONENTE ALERTAS UNIFICADAS --- */
-.alert {
+.alert { 
   display: flex;
   align-items: flex-start;
   gap: 0.85rem;
@@ -472,22 +460,22 @@
   }
 }
 
-.alert-icon {
+.alert-icon { 
   font-size: 1.2rem;
   flex-shrink: 0;
   line-height: 1;
 }
-.alert-message {
+.alert-message { 
   color: #1e293b;
 }
 
-.alert-danger {
+.alert-danger { 
   background-color: #fef2f2;
   border-color: #fca5a5;
   color: #991b1b;
 }
 
-.alert-warning {
+.alert-warning { 
   background-color: #fffbeb;
   border-color: #fde68a;
   color: #92400e;
