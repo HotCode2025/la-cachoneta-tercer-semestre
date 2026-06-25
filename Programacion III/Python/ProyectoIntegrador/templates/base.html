@@ -25,16 +25,16 @@
           <h2>La Cachoneta</h2>
           <p>Gestión de Verdulería</p>
         </div>
+
+
         <nav class="sidebar-menu">
-          <a href="/" class="menu-item active">🏠 Inicio</a>
-          <a href="{{ url_for('mostrar_productos') }}" class="menu-item"
-            >📦 Productos</a
-          >
-          <a href="{{ url_for('comprar_productos') }}" class="menu-item"
-            >🛒 Nueva Venta</a
-          >
-        </nav>
-        <div class="sidebar-footer">
+  <a href="/" class="menu-item {% if request.path == '/' %}active{% endif %}"> Inicio</a>
+  <a href="{{ url_for('mostrar_productos') }}" class="menu-item {% if request.endpoint == 'mostrar_productos' %}active{% endif %}"> Productos</a>
+  <a href="{{ url_for('comprar_productos') }}" class="menu-item {% if request.endpoint == 'comprar_productos' %}active{% endif %}"> Nueva Venta</a>
+
+
+</nav>
+        <div class="sidebar-footer">D
           <p> &copy; La cachoneta - 2026</p>
         </div>
       </aside>
@@ -42,8 +42,10 @@
       <div class="main-wrapper">
         <div class="content-body">{% block content %}{% endblock %}</div>
       </div>
+   
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>

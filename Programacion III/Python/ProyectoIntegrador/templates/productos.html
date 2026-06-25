@@ -68,12 +68,12 @@
                 {% endif %}
               </td>
               
-              <td class="text-center hide-mobile">
-                <div class="actions-wrapper">
-                  <button type="button" class="action-btn edit-btn" title="Editar">✏️</button>
-                  <a href="{{ url_for('eliminar_producto', nombre=p.nombre) }}" class="action-btn delete-btn" title="Eliminar" onclick="return confirm('¿Seguro querés eliminar este producto?');">🗑️</a>
-                </div>
-              </td>
+<td class="text-center hide-mobile">
+  <div class="actions-wrapper">
+    <button type="button" class="action-btn edit-btn" title="Editar"></button>
+    <a href="{{ url_for('eliminar_producto', nombre=p.nombre) }}" class="action-btn delete-btn" title="Eliminar" onclick="confirmarEliminacion(event, this.href, '{{ p.nombre }}')">🗑️</a>
+   </div>
+</td>              </td>
             </tr>
             {% endfor %}
           </tbody>
@@ -138,13 +138,39 @@
         </div>
         
         <div class="drawer-danger-zone">
-          <a href="#" id="drawerDeleteLink" class="btn-drawer-delete" onclick="return confirm('¿Seguro querés eliminar este producto?');">🗑️ Eliminar Producto Definitivamente</a>
+          <<a href="#" id="drawerDeleteLink" class="btn-drawer-delete" onclick="confirmarEliminacion(event, this.href, 'este producto')">🗑️ Eliminar Producto Definitivamente</a>a href="#" id="drawerDeleteLink" class="btn-drawer-delete" onclick="return confirm('¿Seguro querés eliminar este producto?');">🗑️ Eliminar Producto Definitivamente</a>
         </div>
       </div>
     </div>
 
   </div>
 </div>
+
+<script>
+  function confirmarEliminacion(event, url, nombreProducto) {
+    event.preventDefault(); 
+
+    Swal.fire({
+      title: '¿Eliminar producto?',
+      text: "Estás por borrar " + nombreProducto + " del inventario. ¡Esta acción no se puede deshacer!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#e74c3c', // Rojo llamativo para eliminar
+      cancelButtonColor: '#1e4620',  // Verde oscuro de tu verdulería para cancelar
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      background: '#ffffff', // Fondo blanco limpio
+      color: '#2b2b2b', // Letras oscuras
+      iconColor: '#e74c3c',
+      toast: false,
+      position: 'center' // Centrado en pantalla estilo Twitch
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = url;
+      }
+    })
+  }
+</script>
 
 <script src="{{ url_for('static', filename='js/productos.js') }}"></script>
 {% endblock %}
