@@ -1,9 +1,117 @@
+// ==========================================
+// 1. VARIABLES
+// ==========================================
 $primary-color: rgb(90, 89, 28);
-$secondary-color: rgb(224, 124, 31);
-$terciary-color: rgb(226, 226, 154);
-$primary-text-color: rgb(63, 38, 1);
-$font-stack: 'IBM Plex Sans', 'sans-serif';
+$secundary-color: rgb(224, 124, 31);
+$tertiary-color: rgb(226, 226, 154);
+$quaternary-color: orange;
+$primary-tex-color: rgb(63, 38, 1);
+$font-stack: 'IBM Plex Sans', sans-serif;
+$paragraph-size: 1.5em; // Corregido: punto en vez de coma
 
+// ==========================================
+// 2. MIXINS
+// ==========================================
+// Reutilizable para cualquier comportamiento Flexbox
+@mixin flexLayout(
+  $direction: row,
+  $content: flex-start,
+  $align: stretch,
+  $wrap: nowrap
+) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $content;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+// Botón básico transparente
+@mixin buttonReset {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+// Centrado absoluto (usado en contenedores de imágenes, etc.)
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// ==========================================
+// 3. HERENCIA (Placeholders %)
+// ==========================================
+// Estructura compartida para section1 y section2 sin duplicar CSS innecesario
+%section-base {
+  padding-bottom: 60px;
+  h2 {
+    font-weight: 300;
+    padding-bottom: 60px;
+  }
+}
+
+// Estructura base para los botones estilizados del artículo
+%button-styled {
+  @include buttonReset;
+  width: 12vw;
+  padding: 20px;
+  border-radius: 35px;
+  font-size: 1em;
+  color: white;
+}
+
+// Estructura estructural básica para tus tarjetas de producto
+%base-card {
+  width: 14vw;
+  height: 45vh;
+  padding: 20px;
+  border-radius: 8px;
+  @include flexLayout(
+    column
+  ); // Necesario para que funcione el margin-top: auto del h3
+}
+
+// Estructura interna completa de la tarjeta (Heredada por sección 1 y 2)
+%tarjeta-completa {
+  @extend %base-card;
+
+  .icons {
+    width: 100%;
+    @include flexLayout(row, flex-end);
+    padding-bottom: 12px;
+
+    svg {
+      width: 28px;
+      height: 28px;
+      stroke: olive;
+      stroke-width: yellow;
+    }
+  }
+
+  .product-image {
+    width: 100%;
+    height: auto;
+    @include flexCenter;
+
+    img {
+      width: 12vw;
+      height: 30vh;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+  }
+
+  /* Aquí está el truco: empujamos el h3 y el contenido inferior al fondo de la tarjeta */
+  h3 {
+    margin-top: auto;
+  }
+}
+
+// ==========================================
+// 4. ESTILOS BASE Y COMPONENTES
+// ==========================================
 body {
   background-color: rgb(241, 208, 115);
   margin: 0;
@@ -12,30 +120,103 @@ body {
 }
 
 nav {
-  width: 100%;
-  height: 100px;
+  width: auto;
+  @include flexLayout(row, space-between, center);
+  color: $primary-tex-color;
+  padding: 15px;
 
   p {
-    font-size: 1.5;
+    font-size: $paragraph-size;
     padding-left: 30px;
   }
 
   .icons {
-    display: flex;
+    @include flexLayout(row, flex-start, center);
+    gap: 15px;
     button {
-      background: none;
-      border-style: none;
+      @include buttonReset;
     }
   }
 }
 
-main {
-  background-color: $primary-color;
+article {
+  width: auto;
+  color: $primary-tex-color;
+  @include flexLayout(row, space-between, center);
+  padding: 70px 45px 0 45px; // shorthand para simplificar padding (top right bottom left)
+
+  .info-section {
+    @include flexLayout(column);
+    padding-top: 50px;
+    gap: 25px;
+  }
+
+  h1 {
+    font-size: 3em;
+    padding: 0;
+    margin: 0;
+  }
+
+  p {
+    font-size: $paragraph-size;
+  }
+
+  button {
+    @extend %button-styled;
+    background-color: $quaternary-color;
+  }
+
+  img {
+    width: 25vw;
+    border-radius: 19px;
+  }
+}
+
+section {
+  width: auto;
+  height: auto;
+  background-color: rgb(214, 201, 176);
+  padding: 60px;
+
+  h2 {
+    color: $primary-tex-color;
+    font-size: 2em;
+  }
+
+  // Contenedor general de tarjetas para ambas secciones
+  .card-section {
+    @include flexLayout(row, center, center, wrap);
+    width: auto;
+    height: auto;
+    column-gap: 200px;
+    row-gap: 200px;
+  }
+
+  // SECCIÓN 1 (Naranja)
+  .section1 {
+    @extend %section-base;
+
+    .product-card {
+      @extend %tarjeta-completa;
+      background-color: $secundary-color;
+      color: $primary-tex-color;
+    }
+  }
+
+  // SECCIÓN 2 (Amarilla/Verde clara)
+  .section2 {
+    @extend %section-base;
+
+    .product-card {
+      @extend %tarjeta-completa; // Ahora hereda exactamente la misma estructura interna
+      background-color: $tertiary-color; // Cambiamos solo el fondo
+      color: rgb(37, 51, 12); // Cambiamos solo el color de texto
+    }
+  }
 }
 
 footer {
-  $background: rgb(199, 116, 20);
-  background-color: $background;
+  background-color: $quaternary-color;
   width: 100%;
   height: 250px;
 }
