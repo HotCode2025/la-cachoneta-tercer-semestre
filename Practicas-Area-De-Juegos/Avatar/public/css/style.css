@@ -10,6 +10,11 @@ html{
   background-size: cover;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+
 body{
   display: flex;
   flex-direction: column;
