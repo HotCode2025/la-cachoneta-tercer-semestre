@@ -132,19 +132,16 @@
           </div>
         </div>
 
-        <div class="drawer-actions">
+       <div class="drawer-actions">
           <button type="button" class="btn-drawer btn-drawer-cancel" id="closeDrawerBtn">Cancelar</button>
           <button type="button" class="btn-drawer btn-drawer-confirm" id="confirmDrawerBtn">Confirmar Cambios</button>
         </div>
         
         <div class="drawer-danger-zone">
-          <<a href="#" id="drawerDeleteLink" class="btn-drawer-delete" onclick="confirmarEliminacion(event, this.href, 'este producto')">🗑️ Eliminar Producto Definitivamente</a>a href="#" id="drawerDeleteLink" class="btn-drawer-delete" onclick="return confirm('¿Seguro querés eliminar este producto?');">🗑️ Eliminar Producto Definitivamente</a>
+          <a href="#" id="drawerDeleteLink" class="btn-drawer-delete" onclick="confirmarEliminacion(event, this.href, 'este producto')">🗑️ Eliminar Producto Definitivamente</a>
         </div>
       </div>
     </div>
-
-  </div>
-</div>
 
 <script>
   function confirmarEliminacion(event, url, nombreProducto) {
