@@ -1,6 +1,6 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
-{% block title %}Historial de ventas{% endblock %} 
+{% block title %}Control de Venta{% endblock %}
 
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/ventas.css') }}">
@@ -8,11 +8,12 @@
 
 {% block content %}
 <div class="ventas-page-wrapper">
-  
+
   <div class="ventas-header">
     <div class="header-text">
-      <h1>Historial de Transacciones</h1>
-      <p>Monitorea los ingresos y el flujo de caja de la frutería en tiempo real.</p>
+      <h1>Control de Ventas</h1>
+      <p>Monitorea los ingresos y el flujo de caja de la verdulería en tiempo real, asi como el rendimiento de los
+        productos.</p>
     </div>
     <a href="{{ url_for('index') }}" class="nav-link-back">&larr; Volver al Inicio</a>
   </div>
@@ -37,9 +38,27 @@
     </div>
   </div>
 
+  <div class="charts-section-container">
+
+    <div class="chart-container-wrapper">
+      <h3 class="section-title">Volumen de Ventas (Kg)</h3>
+      <div class="chart-box">
+        <canvas id="ventasChart"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-container-wrapper">
+      <h3 class="section-title">Ingresos por Producto ($)</h3>
+      <div class="chart-box">
+        <canvas id="dineroChart"></canvas>
+      </div>
+    </div>
+
+  </div>
+
   <div class="transactions-container">
     <h3 class="section-title">Transacciones Recientes</h3>
-    
+
     <div class="transactions-list">
       {% for v in ventas %}
       <div class="transaction-item">
@@ -65,19 +84,81 @@
       <span>Mostrando {{ ventas | length }} de {{ total_count }} transacciones</span>
       <div class="pagination-sim">
         {% if current_page > 1 %}
-          <a href="{{ url_for('ventas', page=current_page - 1) }}" class="pag-btn">&lt;</a>
+        <a href="{{ url_for('ventas', page=current_page - 1) }}" class="pag-btn">&lt;</a>
         {% endif %}
-        
+
         {% for page_num in range(1, total_pages + 1) %}
-          <a href="{{ url_for('ventas', page=page_num) }}" class="pag-btn {% if page_num == current_page %}active{% endif %}">{{ page_num }}</a>
+        <a href="{{ url_for('ventas', page=page_num) }}"
+          class="pag-btn {% if page_num == current_page %}active{% endif %}">{{ page_num }}</a>
         {% endfor %}
-        
-        {% if current_page < total_pages %}
-          <a href="{{ url_for('ventas', page=current_page + 1) }}" class="pag-btn">&gt;</a>
-        {% endif %}
+
+        {% if current_page < total_pages %} <a href="{{ url_for('ventas', page=current_page + 1) }}" class="pag-btn">
+          &gt;</a>
+          {% endif %}
       </div>
     </div>
   </div>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // GRÁFICO 1: KILOGRAMOS
+  const ctxKg = document.getElementById('ventasChart').getContext('2d');
+  const labelsKg = JSON.parse('{{ grafico_labels | tojson | safe }}');
+  const valoresKg = JSON.parse('{{ grafico_valores | tojson | safe }}');
+
+  new Chart(ctxKg, {
+    type: 'bar',
+    data: {
+      labels: labelsKg,
+      datasets: [{
+        data: valoresKg,
+        backgroundColor: '#2d6a4f', // Verde oscuro
+        borderRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: 'Kg', color: '#64748b' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // GRÁFICO 2: DINERO GANADO
+  const ctxDinero = document.getElementById('dineroChart').getContext('2d');
+  const labelsDinero = JSON.parse('{{ grafico_dinero_labels | tojson | safe }}');
+  const valoresDinero = JSON.parse('{{ grafico_dinero_valores | tojson | safe }}');
+
+  new Chart(ctxDinero, {
+    type: 'bar',
+    data: {
+      labels: labelsDinero,
+      datasets: [{
+        data: valoresDinero,
+        backgroundColor: '#52b788',
+        borderRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: { display: true, text: 'Pesos ($)', color: '#64748b' },
+          ticks: {
+            callback: function (value) { return '$' + value; }
+          }
+        },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+</script>
 {% endblock %}

@@ -277,3 +277,36 @@
     justify-content: space-between;
   }
 }
+
+/* --- CONTENEDOR FLEXIBLE DE GRÁFICOS --- */
+.charts-section-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  width: 100%;
+}
+
+.chart-container-wrapper {
+  min-width: 500px;
+}
+
+.chart-box {
+  background: #ffffff;
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  height: 280px; /* Reducimos levemente la altura para que entren cómodos juntos */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
+}
+
+/* En tablets y pantallas grandes (Desktop), se ponen uno al lado del otro (50% de ancho cada uno) */
+@media (min-width: 768px) {
+  .charts-section-container {
+    flex-direction: row;
+  }
+  
+  .chart-container-wrapper {
+    flex: 1; /* Esto hace que ambos ocupen exactamente la mitad del espacio */
+  }
+}

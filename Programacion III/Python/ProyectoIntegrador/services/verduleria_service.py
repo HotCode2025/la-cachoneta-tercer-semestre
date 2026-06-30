@@ -92,50 +92,41 @@ class VerduleriaService:
         })
 
         total = data["precio"] * cantidad
-
         venta = {
             "producto": nombre,
             "cantidad": cantidad,
             "total": total
         }
-
         db.collection("ventas").add(venta)
-
         return True
 
 
     def obtener_ventas(self):
-
         ventas = []
-
+        # db.collection("ventas").stream() viaja a Cloud Firestore (NoSQL)
+        # y nos trae en tiempo real todos los documentos que hay cargados.
         docs = db.collection("ventas").stream()
-
+        
         for doc in docs:
-
-            ventas.append(
-                doc.to_dict()
-            )
-
+            # .to_dict() limpia los metadatos de Google y transforma
+            # cada documento en un diccionario común de Python (clave: valor).
+            ventas.append(doc.to_dict())
+            
         return ventas
 
-
     def obtener_total_ventas(self):
-
         total = 0
-
-        docs = db.collection("ventas").stream()
-
+        docs = db.collection("ventas").stream() # Volvemos a leer la colección
+        
         for doc in docs:
-
             data = doc.to_dict()
-
+            # Buscamos el campo "total" de cada venta y lo acumulamos
             total += data["total"]
-
+            
         return total
 
 
     def obtener_stock_critico(self, limite):
-
         productos = self.obtener_productos()
 
         return [

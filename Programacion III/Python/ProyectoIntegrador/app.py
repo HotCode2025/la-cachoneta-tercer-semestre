@@ -188,22 +188,62 @@ def mostrar_productos():
 
 @app.route("/ventas")
 def ventas():
+    # 1. PEDIR LOS DATOS A LA BD
+    # Llamamos al servicio que viaja a Cloud Firestore
     lista_ventas = service.obtener_ventas()
+    
+    # 2. CÁLCULO DE KPIs BÁSICOS
     total_acumulado = service.obtener_total_ventas()
+    # Sacamos el ticket medio metiendo un "if" en una sola línea para evitar el error de división por cero si la BD está vacía
     ticket_medio = total_acumulado / len(lista_ventas) if lista_ventas else 0
     
-    # Configuración de paginación (6 por página)
-    PER_PAGE = 4
-    page = request.args.get('page', 1, type=int)
+    # 3. PROCESAMIENTO Y AGRUPACIÓN DE DATOS
+    # Como Firestore nos devuelve documentos sueltos agrupamos manualmente por producto usando diccionarios de Python
+    kg_por_producto = {}
+    dinero_por_producto = {}
+    
+    for v in lista_ventas:
+        # Usamos .get() con valores por defecto por si algún documento de la BD vino medio incompleto o corrupto
+        prod = v.get("producto", "Desconocido").capitalize()
+        cant = v.get("cantidad", 0)
+        total_v = v.get("total", 0)
+        
+        # Acumulamos los Kg: si el producto no existe en el diccionario, .get(prod, 0) devuelve 0 y le suma la cantidad
+        kg_por_producto[prod] = kg_por_producto.get(prod, 0) + cant
+        # Acumulamos la plata recaudada por cada fruta/verdura de la misma manera
+        dinero_por_producto[prod] = dinero_por_producto.get(prod, 0) + total_v
+
+    # 4. ORDENAMIENTO (De Mayor a Menor para los gráficos de barras)
+    # Convertimos los diccionarios en listas de tuplas y las ordenamos usando sorted()
+    # key=lambda x: x[1] nos sirve para decirle a Python que ordene por el VALOR acumulado (los kg o la plata) y NO por la clave (el nombre)
+    # reverse=True asegura que el más vendido quede primero en la lista
+    
+    # Gráfico de Kilogramos
+    prod_kg_ordenados = sorted(kg_por_producto.items(), key=lambda x: x[1], reverse=True)
+    # Separamos en dos listas limpias (Eje X: etiquetas, Eje Y: valores numéricos) usando "List Comprehension"
+    grafico_kg_labels = [item[0] for item in prod_kg_ordenados]
+    grafico_kg_valores = [item[1] for item in prod_kg_ordenados]
+
+    # Gráfico de Dinero recaudado
+    prod_dinero_ordenados = sorted(dinero_por_producto.items(), key=lambda x: x[1], reverse=True)
+    grafico_dinero_labels = [item[0] for item in prod_dinero_ordenados]
+    grafico_dinero_valores = [item[1] for item in prod_dinero_ordenados]
+
+    # 5. LÓGICA DE PAGINACIÓN
+    PER_PAGE = 4 # Mostramos de a 4 órdenes por página para no saturar la pantalla
+    page = request.args.get('page', 1, type=int) # Agarramos el número de página de la URL (?page=2), si no hay nada, por defecto es 1
     total_ventas_count = len(lista_ventas)
     
-    # Segmentación de la lista en porciones
+    # Cortamos la lista usando "Slicing" de Python según los índices calculados
     start = (page - 1) * PER_PAGE
     end = start + PER_PAGE
     ventas_paginadas = lista_ventas[start:end]
     
+    # Calculamos el total de páginas redondeando para arriba usando división entera "//"
     total_pages = (total_ventas_count + PER_PAGE - 1) // PER_PAGE if total_ventas_count > 0 else 1
 
+    # 6. RENDERIZADO Y ENVÍO DE DATOS
+    # Inyectamos todas las variables procesadas al template de Jinja2
     return render_template(
         "ventas.html",
         ventas=ventas_paginadas,
@@ -211,7 +251,11 @@ def ventas():
         ticket_medio=ticket_medio,
         current_page=page,
         total_pages=total_pages,
-        total_count=total_ventas_count
+        total_count=total_ventas_count,
+        grafico_labels=grafico_kg_labels,
+        grafico_valores=grafico_kg_valores,
+        grafico_dinero_labels=grafico_dinero_labels,
+        grafico_dinero_valores=grafico_dinero_valores
     )
 
 
